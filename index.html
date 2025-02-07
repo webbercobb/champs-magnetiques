@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Champs Magnétiques</title>
+  <title>Les Champs Magnétiques</title>
   <style>
     * {
       margin: 0;
@@ -65,40 +65,87 @@
       line-height: 1.6;
     }
 
-    .shop-message,
-    .about-header {
+    .concepts-list a {
+      display: block;
+      margin: 10px 0;
+      text-decoration: none;
+      color: #111;
+      font-size: 18px;
+    }
+
+    .concepts-list a:hover {
+      color: #555;
+    }
+
+    .shop-message, .about-header {
       margin-bottom: 30px;
     }
 
     .logo {
       margin-bottom: 10px;
-      max-width: 270px; /* Slightly larger logo */
+      max-width: 270px;
     }
 
     .brand-name {
-      width: 180px; /* Slightly smaller brand name */
+      width: 180px;
       margin-bottom: 20px;
     }
+
+    .concept-container {
+      text-align: left;
+      width: 100%;
+      max-width: 600px;
+    }
+
+    .concept-container h2 {
+      margin-bottom: 10px;
+    }
+
+    .concept-container p {
+      margin-bottom: 10px;
+    }
+
   </style>
 </head>
 <body>
   <nav>
-    <a href="#" onclick="showSection('home')">Home</a>
-    <a href="#" onclick="showSection('shop')">Shop</a>
-    <a href="#" onclick="showSection('about')">About</a>
+    <a href="#" onclick="showSection('maison')">Maison</a>
+    <a href="#" onclick="showSection('concepts')">Concepts</a>
+    <a href="#" onclick="showSection('manifeste')">Manifeste</a>
+    <a href="#" onclick="showSection('contact')">Contact</a>
   </nav>
 
-  <section id="home" class="active">
+  <section id="maison" class="active">
     <img src="logo.png" alt="Logo" class="logo">
     <img src="brandname.png" alt="Brand Name" class="brand-name">
   </section>
 
-  <section id="shop">
-    <h1 class="shop-message">COMING SOON</h1>
+  <section id="concepts">
+    <h1>Concepts</h1>
+    <div class="concepts-list">
+      <a href="#" onclick="showConcept('cadavre-exquis')">001 Cadavre Exquis</a>
+      <a href="#" onclick="showConcept('noeud-nu')">002 Nœud Nu</a>
+      <a href="#" onclick="showConcept('glaciere')">003 Glacière</a>
+      <a href="#" onclick="showConcept('fige')">004 Figé</a>
+      <a href="#" onclick="showConcept('ligne-de-flottaison')">005 Ligne de Flottaison</a>
+      <a href="#" onclick="showConcept('faux-pas')">006 Faux Pas</a>
+      <a href="#" onclick="showConcept('quatre-yeux')">007 Quatre Yeux</a>
+      <a href="#" onclick="showConcept('assassine')">008 Assassiné</a>
+      <a href="#" onclick="showConcept('cameleon')">009 Caméléon</a>
+      <a href="#" onclick="showConcept('lautre-moitie')">010 L’Autre Moitié</a>
+    </div>
   </section>
 
-  <section id="about">
-    <h1 class="about-header">About</h1>
+  <!-- Concept Pages -->
+  <section id="concept-page" class="concept-container">
+    <h2 id="concept-title"></h2>
+    <p id="concept-description"></p>
+    <p id="concept-edition"></p>
+    <p><strong>For purchase:</strong> Email your name, quantity, variation (if applicable), and size to <a href="mailto:shop@champsmag.com">shop@champsmag.com</a></p>
+  </section>
+
+  <section id="manifeste">
+    <h1>Manifeste</h1>
     <p>
       Les Champs Magnétiques is a conceptual fashion house inspired by Surrealist pioneers André Breton and Philippe Soupault, who published <em>Les Champs Magnétiques</em> in 1920. Their literary experiment, blending instinct and intention, chaos and control, continues to resonate a century later.
     </p>
@@ -107,18 +154,49 @@
     </p>
   </section>
 
+  <section id="contact">
+    <h1>Contact</h1>
+    <p>For inquiries, please email <a href="mailto:contact@champsmag.com">contact@champsmag.com</a></p>
+  </section>
+
   <script>
     function showSection(sectionId) {
-      // Hide all sections
-      const sections = document.querySelectorAll("section");
-      sections.forEach(section => {
+      document.querySelectorAll("section").forEach(section => {
         section.classList.remove("active");
       });
+      document.getElementById(sectionId).classList.add("active");
+    }
 
-      // Show the selected section
-      const targetSection = document.getElementById(sectionId);
-      if (targetSection) {
-        targetSection.classList.add("active");
+    function showConcept(conceptId) {
+      const concepts = {
+        "cadavre-exquis": {
+          title: "001 Cadavre Exquis",
+          description: "A deconstructed ransom note in wearable form. Vintage t-shirts are cut apart, their letters rearranged and appliquéd onto heavyweight sweatshirts, forming fragmented phrases. Each piece is one-of-one, the result of chance, intention, and destruction.",
+          edition: "Edition: 260 total, 26 unique phrases, 10 of each."
+        },
+        "noeud-nu": {
+          title: "002 Nœud Nu",
+          description: "A white button-up with a missing bowtie—except the absence is the design. A precise cutout around the collar leaves the shape of an untied bow, revealing only what’s underneath. A formal shirt with an intentional gap in its authority.",
+          edition: "Edition: 260 total."
+        },
+        "glaciere": {
+          title: "003 Glacière",
+          description: "A gas station Arctic Ice bag, solidified into a jewelry box. The barcodes, typography, and disposable branding are preserved, but the plastic is rigid, the ice inside turned to diamonds. A container for something priceless, disguised as something forgettable.",
+          edition: "Edition: 260 total."
+        },
+        "fige": {
+          title: "004 Figé",
+          description: "Ankle-high patent leather boots fused to a steel base. Step in, stand up, and the silhouette locks you into position. Ten versions, ten iconic stances—each designed to shape the wearer rather than be worn. A study in forced elegance.",
+          edition: "Edition: 26 total, 13 poses, 2 of each."
+        },
+        // Add remaining concepts here...
+      };
+
+      if (concepts[conceptId]) {
+        document.getElementById("concept-title").innerText = concepts[conceptId].title;
+        document.getElementById("concept-description").innerText = concepts[conceptId].description;
+        document.getElementById("concept-edition").innerText = concepts[conceptId].edition;
+        showSection("concept-page");
       }
     }
   </script>
