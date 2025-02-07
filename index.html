@@ -3,100 +3,105 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Les Champs Magnétiques</title>
+  <title>Champs Magnétiques</title>
   <style>
-    /* General Reset */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      font-family: Arial, sans-serif;
     }
 
     body {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      background-color: #f4f4f4;
-      color: #222;
+      background-color: #f8f8f8;
+      color: #111;
       display: flex;
       justify-content: center;
       align-items: center;
+      flex-direction: column;
       height: 100vh;
-      overflow: hidden;
     }
 
-    /* Container Styling */
     .container {
       text-align: center;
-      max-width: 600px;
-      padding: 20px;
-      background: white;
-      border: 1px solid #ddd;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-      border-radius: 8px;
     }
 
-    /* Logo Styling */
     .logo {
-      max-width: 200px;
+      max-width: 150px;
       margin-bottom: 20px;
-      animation: fadeIn 2s ease-in-out;
     }
 
-    /* Title Styling */
     .title {
-      font-size: 48px;
-      font-weight: bold;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      margin-bottom: 10px;
+      font-size: 24px;
+      letter-spacing: 2px;
     }
 
-    /* Subtitle Styling */
-    .subtitle {
-      font-family: 'Georgia', serif;
-      font-size: 18px;
-      color: #555;
-      margin-top: 10px;
-      margin-bottom: 30px;
+    .nav {
+      position: fixed;
+      top: 20px;
+      right: 20px;
     }
 
-    /* Button Styling */
-    .btn {
-      display: inline-block;
+    .nav a {
+      margin-left: 15px;
       text-decoration: none;
-      font-size: 16px;
-      padding: 10px 20px;
-      border: 2px solid #000;
-      color: #000;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      border-radius: 5px;
-      transition: all 0.3s ease;
+      font-size: 14px;
+      color: #111;
+      transition: color 0.3s;
     }
 
-    .btn:hover {
-      background: black;
-      color: white;
+    .nav a:hover {
+      color: #555;
     }
 
-    /* Animation */
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: scale(0.9);
-      }
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
+    .content {
+      display: none;
+      text-align: center;
+      padding: 20px;
+    }
+
+    #about,
+    #shop {
+      display: none;
+    }
+
+    .active {
+      display: block;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <img src="logo.png" alt="Les Champs Magnétiques Logo" class="logo">
-    <h1 class="title">Les Champs Magnétiques</h1>
-    <p class="subtitle">A conceptual fashion house redefining surrealist minimalism.</p>
-    <a href="#" class="btn">Explore Collection</a>
+  <div class="nav">
+    <a href="#" onclick="navigateTo('home')">Home</a>
+    <a href="#" onclick="navigateTo('shop')">Shop</a>
+    <a href="#" onclick="navigateTo('about')">About</a>
   </div>
+
+  <div id="home" class="container active">
+    <img src="logo.png" alt="Champs Magnétiques Logo" class="logo">
+    <div class="title">Champs Magnétiques</div>
+  </div>
+
+  <div id="shop" class="content">
+    <h1>Shop</h1>
+    <p>Coming soon: our iconic first collection.</p>
+  </div>
+
+  <div id="about" class="content">
+    <h1>About</h1>
+    <p>
+      In 1920, André Breton and Philippe Soupault introduced <i>Les Champs Magnétiques</i> (<i>The Magnetic Fields</i>), a work that defied the conventions of its time...
+      <!-- Add the full about text here -->
+    </p>
+  </div>
+
+  <script>
+    function navigateTo(page) {
+      document.querySelectorAll(".container, .content").forEach(div => {
+        div.classList.remove("active");
+      });
+      document.getElementById(page).classList.add("active");
+    }
+  </script>
 </body>
 </html>
