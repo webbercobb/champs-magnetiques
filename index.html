@@ -60,11 +60,6 @@
       padding: 20px;
     }
 
-    #about,
-    #shop {
-      display: none;
-    }
-
     .active {
       display: block;
     }
@@ -90,17 +85,23 @@
   <div id="about" class="content">
     <h1>About</h1>
     <p>
-      In 1920, André Breton and Philippe Soupault introduced <i>Les Champs Magnétiques</i> (<i>The Magnetic Fields</i>), a work that defied the conventions of its time...
+      In 1920, André Breton and Philippe Soupault introduced <i>Les Champs Magnétiques</i> (<i>The Magnetic Fields</i>)...
       <!-- Add the full about text here -->
     </p>
   </div>
 
   <script>
     function navigateTo(page) {
+      // Hide all sections
       document.querySelectorAll(".container, .content").forEach(div => {
         div.classList.remove("active");
       });
-      document.getElementById(page).classList.add("active");
+
+      // Show the target section
+      const target = document.getElementById(page);
+      if (target) {
+        target.classList.add("active");
+      }
     }
   </script>
 </body>
