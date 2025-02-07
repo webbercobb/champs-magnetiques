@@ -13,7 +13,7 @@
     }
 
     body {
-      background-color: #f8f8f8;
+      background-color: #9a9482;
       color: #111;
       display: flex;
       flex-direction: column;
@@ -22,28 +22,17 @@
       height: 100vh;
     }
 
-    .logo {
-      max-width: 150px;
-      margin-bottom: 20px;
-    }
-
-    .title {
-      font-size: 24px;
-      letter-spacing: 2px;
-      margin-bottom: 40px;
-    }
-
     nav {
       position: fixed;
       top: 20px;
       right: 20px;
+      font-size: 14px;
     }
 
     nav a {
       margin-left: 15px;
       text-decoration: none;
       color: #111;
-      font-size: 14px;
       transition: color 0.3s;
     }
 
@@ -54,7 +43,7 @@
     section {
       display: none;
       text-align: center;
-      padding: 20px;
+      padding: 40px 20px;
       width: 100%;
       max-width: 600px;
     }
@@ -63,7 +52,31 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
+    }
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .shop-message,
+    .about-header {
+      margin-bottom: 30px;
+    }
+
+    .logo {
+      margin-bottom: 10px;
+    }
+
+    .brand-name {
+      width: 200px; /* Adjust the width of the brand name PNG */
+      margin-bottom: 20px;
     }
   </style>
 </head>
@@ -76,24 +89,20 @@
 
   <section id="home" class="active">
     <img src="logo.png" alt="Logo" class="logo">
-    <div class="title">Champs Magnétiques</div>
+    <img src="brandname.png" alt="Brand Name" class="brand-name">
   </section>
 
   <section id="shop">
-    <h1>Shop</h1>
-    <p>Coming soon: our iconic first collection.</p>
+    <h1 class="shop-message">COMING SOON</h1>
   </section>
 
   <section id="about">
-    <h1>About</h1>
+    <h1 class="about-header">About</h1>
     <p>
-      In 1920, André Breton and Philippe Soupault introduced Les Champs Magnétiques (The Magnetic Fields), a work that defied the conventions of its time. This first Surrealist text embraced spontaneity, contradiction, and the unconscious as tools to fracture traditional narratives and uncover unexpected meaning. It wasn’t merely a rejection of order; it was an exploration of the forces that pull us toward the unexplainable and the uncanny.
-
-Today, a century later, the world has never been more structured, controlled, or surveilled. Creativity is shaped by algorithms, taste dictated by trends, and individuality flattened into commodified aesthetics. In this moment, Champs Magnétiques emerges as both a revival and an evolution: a conceptual fashion house that brings the radical spirit of Surrealism into the present day, reclaiming it from the superficiality of modern culture.
-
-At its core, Champs Magnétiques explores tension: Chaos and Control, Art and Commerce, Instinct and Intention. It isn’t a revival of Surrealism but a continuation of its restless energy, an attempt to bring its destabilizing magnetic pull into a cultural moment that craves certainty.
-
-Each collection reflects this ethos, embracing fragmentation and juxtaposition to create pieces that demand a second glance. This is not a retreat into nostalgia but a question: What does Surrealism look like a hundred years later, when everything is seen and known? The answer is not in the past; it’s in the unresolved, the unexpected, and the unknowable.
+      Champs Magnétiques is a conceptual fashion house inspired by Surrealist pioneers André Breton and Philippe Soupault, who published *Les Champs Magnétiques* in 1920. This literary experiment, blending instinct and intention, chaos and control, continues to resonate a century later.
+    </p>
+    <p>
+      Our house explores these contradictions, crafting garments and objects of desire that are provocative yet wearable, conceptual yet approachable. Each collection stakes a claim in the broader conversation of art and fashion, inviting wearers to navigate a shifting world with curiosity and purpose.
     </p>
   </section>
 
