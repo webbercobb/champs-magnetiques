@@ -60,7 +60,10 @@
     }
 
     section.active {
-      display: block;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
   </style>
 </head>
@@ -84,8 +87,13 @@
   <section id="about">
     <h1>About</h1>
     <p>
-      Champs Magnétiques is a conceptual fashion house inspired by...
-      <!-- Insert your About content here -->
+      In 1920, André Breton and Philippe Soupault introduced Les Champs Magnétiques (The Magnetic Fields), a work that defied the conventions of its time. This first Surrealist text embraced spontaneity, contradiction, and the unconscious as tools to fracture traditional narratives and uncover unexpected meaning. It wasn’t merely a rejection of order; it was an exploration of the forces that pull us toward the unexplainable and the uncanny.
+
+Today, a century later, the world has never been more structured, controlled, or surveilled. Creativity is shaped by algorithms, taste dictated by trends, and individuality flattened into commodified aesthetics. In this moment, Champs Magnétiques emerges as both a revival and an evolution: a conceptual fashion house that brings the radical spirit of Surrealism into the present day, reclaiming it from the superficiality of modern culture.
+
+At its core, Champs Magnétiques explores tension: Chaos and Control, Art and Commerce, Instinct and Intention. It isn’t a revival of Surrealism but a continuation of its restless energy, an attempt to bring its destabilizing magnetic pull into a cultural moment that craves certainty.
+
+Each collection reflects this ethos, embracing fragmentation and juxtaposition to create pieces that demand a second glance. This is not a retreat into nostalgia but a question: What does Surrealism look like a hundred years later, when everything is seen and known? The answer is not in the past; it’s in the unresolved, the unexpected, and the unknowable.
     </p>
   </section>
 
@@ -93,7 +101,9 @@
     function showSection(sectionId) {
       // Hide all sections
       const sections = document.querySelectorAll("section");
-      sections.forEach(section => section.classList.remove("active"));
+      sections.forEach(section => {
+        section.classList.remove("active");
+      });
 
       // Show the selected section
       const targetSection = document.getElementById(sectionId);
