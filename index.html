@@ -5,43 +5,98 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Les Champs Magnétiques</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
+    /* General Reset */
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background-color: #f4f4f4;
+      color: #222;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
-      background-color: #f8f8f8;
+      overflow: hidden;
     }
+
+    /* Container Styling */
     .container {
       text-align: center;
+      max-width: 600px;
+      padding: 20px;
+      background: white;
+      border: 1px solid #ddd;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
     }
+
+    /* Logo Styling */
     .logo {
-      max-width: 300px;
+      max-width: 200px;
       margin-bottom: 20px;
+      animation: fadeIn 2s ease-in-out;
     }
+
+    /* Title Styling */
     .title {
-      font-family: 'Helvetica Neue', sans-serif;
-      font-size: 36px;
-      letter-spacing: 2px;
+      font-size: 48px;
+      font-weight: bold;
+      letter-spacing: 4px;
       text-transform: uppercase;
       margin-bottom: 10px;
     }
+
+    /* Subtitle Styling */
     .subtitle {
       font-family: 'Georgia', serif;
       font-size: 18px;
       color: #555;
-      margin-top: 0;
+      margin-top: 10px;
+      margin-bottom: 30px;
+    }
+
+    /* Button Styling */
+    .btn {
+      display: inline-block;
+      text-decoration: none;
+      font-size: 16px;
+      padding: 10px 20px;
+      border: 2px solid #000;
+      color: #000;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      background: black;
+      color: white;
+    }
+
+    /* Animation */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <img src="logo.jpg" alt="Les Champs Magnétiques Logo" class="logo">
+    <img src="logo.png" alt="Les Champs Magnétiques Logo" class="logo">
     <h1 class="title">Les Champs Magnétiques</h1>
-    <p class="subtitle">A conceptual fashion brand.</p>
+    <p class="subtitle">A conceptual fashion house redefining surrealist minimalism.</p>
+    <a href="#" class="btn">Explore Collection</a>
   </div>
 </body>
 </html>
