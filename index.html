@@ -213,19 +213,23 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  position: absolute; /* Change from 'fixed' to 'absolute' */
+  position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%); /* Keeps it perfectly centered */
+  transform: translate(-50%, -50%);
   width: 100%;
   height: auto;
-  transition: opacity 0.5s ease-in-out;
-  opacity: 0; /* Start invisible */
-  pointer-events: auto; /* Ensure it allows interactions */
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out; /* Fade in ONLY when unlocked */
+  pointer-events: auto;
 }
 
 #maison.active {
   opacity: 1;
+}
+
+#maison.hidden {
+  display: none; /* Instantly disappears when another section is clicked */
 }
   </style>
 </head>
@@ -368,7 +372,7 @@ Les Champs Magnétiques rejects convention. It is not an aesthetic. It is a reac
   document.addEventListener("DOMContentLoaded", function () {
     if (localStorage.getItem("authenticated") === "true") {
       document.getElementById("password-overlay").style.display = "none";
-      document.getElementById("maison").classList.add("active"); // Ensures it's centered immediately
+      document.getElementById("maison").classList.add("active");
     }
   });
 
@@ -379,13 +383,25 @@ Les Champs Magnétiques rejects convention. It is not an aesthetic. It is a reac
     if (userInput === correctPassword) {
       localStorage.setItem("authenticated", "true");
       document.getElementById("password-overlay").style.display = "none";
-      document.getElementById("maison").classList.add("active"); // Fix centering immediately
+      document.getElementById("maison").classList.add("active"); // Fades in on unlock
     } else {
       document.getElementById("error-overlay").style.display = "flex";
       setTimeout(() => {
         document.getElementById("error-overlay").style.display = "none";
-      }, 1500); /* Red screen lasts 1.5 seconds before going back */
+      }, 1500);
     }
+  }
+
+  function showSection(sectionId) {
+    document.querySelectorAll("section").forEach(section => {
+      section.classList.remove("active");
+    });
+
+    if (sectionId !== "maison") {
+      document.getElementById("maison").classList.add("hidden"); // Instantly hide logo/brand name
+    }
+
+    document.getElementById(sectionId).classList.add("active");
   }
 </script>
 <div id="error-overlay">
