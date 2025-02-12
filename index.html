@@ -487,13 +487,16 @@
 
   function showSection(sectionId) {
   document.querySelectorAll("section").forEach(section => {
+    section.classList.remove("active");
     section.style.display = "none"; // Hide all sections
   });
 
   const activeSection = document.getElementById(sectionId);
   if (activeSection) {
-    activeSection.style.display = "flex"; // Ensure it becomes visible
+    activeSection.classList.add("active");
+    activeSection.style.display = "flex"; // Make it visible
   }
+}
 }
 </script>
 <div id="error-overlay">
