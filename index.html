@@ -29,51 +29,79 @@
 }
 
 .password-container {
-  background: #DD1101; /* Red background */
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(180deg, #DD1101, #C00F00); /* Slight gradient */
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2); /* Soft shadow */
   text-align: center;
+  min-width: 280px;
 }
 
 .password-container h2 {
-  margin-bottom: 10px;
-  font-size: 20px;
-  color: white; /* White text for contrast */
+  margin-bottom: 15px;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: white;
+  text-transform: uppercase;
 }
 
 .password-container input {
-  padding: 10px;
+  padding: 12px;
   font-size: 16px;
   width: 100%;
-  margin-bottom: 10px;
-  border: 1px solid white; /* White border for contrast */
-  border-radius: 5px;
-  background: transparent;
-  color: white; /* White text input */
+  margin-bottom: 12px;
+  border-radius: 8px;
+  border: none;
+  background: rgba(255, 255, 255, 0.15); /* Soft translucent white */
+  color: white;
+  text-align: center;
+  font-weight: 400;
+  outline: none;
 }
 
 .password-container input::placeholder {
-  color: white; /* White placeholder text */
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .password-container button {
-  background: #111; /* Black button */
-  color: white; /* White button text */
+  background: #111;
+  color: white;
   border: none;
-  padding: 10px 15px;
+  padding: 12px 18px;
   font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  border-radius: 8px;
   cursor: pointer;
-  border-radius: 5px;
+  transition: all 0.3s ease;
 }
 
 .password-container button:hover {
-  background: #444; /* Slightly lighter on hover */
+  background: #444;
+  box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.2);
+}
+
+/* Error state */
+#error-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: #DD1101; /* Entire screen turns red */
+  display: none;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  z-index: 10000;
 }
 
 #error-message {
-  color: white; /* Error message in white for visibility */
-  display: none;
+  color: white;
+  font-size: 28px;
+  font-weight: 700;
+  text-transform: uppercase;
 }
     * {
       margin: 0;
@@ -320,21 +348,23 @@ Les Champs Magnétiques rejects convention. It is not an aesthetic. It is a reac
   </script>
   <script>
   document.addEventListener("DOMContentLoaded", function () {
-    // Check if user has already entered the password before
     if (localStorage.getItem("authenticated") === "true") {
       document.getElementById("password-overlay").style.display = "none";
     }
   });
 
   function checkPassword() {
-    const correctPassword = "cecin'estpasunmotdepasse"; // The required password
+    const correctPassword = "cecin'estpasunmotdepasse";
     const userInput = document.getElementById("password-input").value;
 
     if (userInput === correctPassword) {
-      localStorage.setItem("authenticated", "true"); // Store authentication
+      localStorage.setItem("authenticated", "true");
       document.getElementById("password-overlay").style.display = "none";
     } else {
-      document.getElementById("error-message").style.display = "block";
+      document.getElementById("error-overlay").style.display = "flex";
+      setTimeout(() => {
+        document.getElementById("error-overlay").style.display = "none";
+      }, 1500); /* Red screen lasts 1.5 seconds before going back */
     }
   }
 </script>
