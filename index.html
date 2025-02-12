@@ -29,7 +29,7 @@
 }
 
 .password-container {
-  background: white;
+  background: #DD1101; /* Red background */
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -39,6 +39,7 @@
 .password-container h2 {
   margin-bottom: 10px;
   font-size: 20px;
+  color: white; /* White text for contrast */
 }
 
 .password-container input {
@@ -46,13 +47,19 @@
   font-size: 16px;
   width: 100%;
   margin-bottom: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid white; /* White border for contrast */
   border-radius: 5px;
+  background: transparent;
+  color: white; /* White text input */
+}
+
+.password-container input::placeholder {
+  color: white; /* White placeholder text */
 }
 
 .password-container button {
-  background: black;
-  color: white;
+  background: #111; /* Black button */
+  color: white; /* White button text */
   border: none;
   padding: 10px 15px;
   font-size: 16px;
@@ -61,7 +68,12 @@
 }
 
 .password-container button:hover {
-  background: #555;
+  background: #444; /* Slightly lighter on hover */
+}
+
+#error-message {
+  color: white; /* Error message in white for visibility */
+  display: none;
 }
     * {
       margin: 0;
