@@ -208,6 +208,22 @@
       color: #de1201;
       font-weight: bold;
     }
+#maison {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: fixed; /* Keeps it centered no matter what */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh; /* Ensures it takes up full screen height */
+  transition: opacity 0.5s ease-in-out;
+  opacity: 0; /* Start invisible */
+}
+
+#maison.active {
+  opacity: 1; /* Smooth fade-in after password */
 
   </style>
 </head>
@@ -350,6 +366,7 @@ Les Champs Magnétiques rejects convention. It is not an aesthetic. It is a reac
   document.addEventListener("DOMContentLoaded", function () {
     if (localStorage.getItem("authenticated") === "true") {
       document.getElementById("password-overlay").style.display = "none";
+      document.getElementById("maison").classList.add("active"); // Ensures it's centered immediately
     }
   });
 
@@ -360,6 +377,7 @@ Les Champs Magnétiques rejects convention. It is not an aesthetic. It is a reac
     if (userInput === correctPassword) {
       localStorage.setItem("authenticated", "true");
       document.getElementById("password-overlay").style.display = "none";
+      document.getElementById("maison").classList.add("active"); // Fix centering immediately
     } else {
       document.getElementById("error-overlay").style.display = "flex";
       setTimeout(() => {
