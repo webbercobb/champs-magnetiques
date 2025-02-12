@@ -173,16 +173,25 @@
       line-height: 1.6;
     }
 
-    .concepts-list a {
-      display: block;
-      margin: 10px 0;
-      text-decoration: none;
-      color: #111;
-      font-size: 18px;
-    }
+   .concepts-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers the items horizontally */
+  justify-content: center; /* Centers the list vertically */
+  height: 100vh; /* Makes sure it takes up the full screen height */
+}
 
-    .concepts-list a:hover {
-      color: #555;
+.concepts-list a {
+  display: block;
+  margin: 10px 0;
+  text-decoration: none;
+  color: #111;
+  font-size: 18px;
+}
+
+.concepts-list a:hover {
+  color: #555;
+}
     }
 
     .shop-message, .about-header {
@@ -265,7 +274,7 @@
   </section>
 
   <section id="concepts">
-    <h1>Concepts</h1>
+    
     <div class="concepts-list">
       <a href="#" onclick="showConcept('cadavre-exquis')">001 Cadavre Exquis</a>
       <a href="#" onclick="showConcept('noeud-nu')">002 Nœud Nu</a>
@@ -290,12 +299,12 @@
   </section>
 
   <section id="manifeste">
-    <h1>Manifeste</h1>
+    
     <style>
     .manifesto-container {
         max-width: 600px; /* Keeps the width tight for elegance */
         margin: 0 auto;
-        padding-top: 150px; /* Pushes content down to avoid overlap */
+        padding-top: 180px; /* Pushes content down to avoid overlap */
     }
 
     .manifesto-title {
@@ -316,7 +325,7 @@
 </style>
 
 <div class="manifesto-container">
-    <h1 class="manifesto-title">Manifeste</h1>
+    
 
     <p class="manifesto">
         Surrealism was born after war. After collapse. After the world proved itself untrustworthy. It is happening again.
@@ -346,7 +355,7 @@
   </section>
 
   <section id="contact">
-    <h1>Contact</h1>
+    
     <p>For inquiries, please email <a href="mailto:contact@champsmag.com" class="contact-email">contact@champsmag.com</a></p>
   </section>
 
