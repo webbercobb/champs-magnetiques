@@ -7,129 +7,13 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-RJECXBWKGN');
 </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Les Champs Magnétiques</title>
-  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;700&display=swap" rel="stylesheet>
   <style>
-  .manifesto-title, 
-.concept-container h2, 
-  .manifesto-title, 
-  .concept-container h2, 
-  #concepts h1 {
-      text-align: right; /* Aligns all titles to the right */
-      font-size: 22px; /* Makes them uniform in size */
-      font-weight: 500; /* Fixes thickness to match */
-      letter-spacing: 0.5px; /* Adds luxury spacing */
-      margin-bottom: 40px; /* Gives breathing room */
-  }
-
-  #contact {
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  transform: translateY(-30px);
-  /* Remove the transform line */
-}
-}
-
-/* 🛠️ ADD THIS TO FIX NAVIGATION ISSUES */
-section.active {
-    display: flex !important;  /* Ensures any active section is visible */
-}
-    #password-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background-color: #D8D0B8;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-}
-
-.password-container {
-  background: linear-gradient(180deg, #DD1101, #C00F00); /* Slight gradient */
-  padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2); /* Soft shadow */
-  text-align: center;
-  min-width: 280px;
-}
-
-.password-container h2 {
-  margin-bottom: 15px;
-  font-size: 22px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  color: white;
-  text-transform: uppercase;
-}
-
-.password-container input {
-  padding: 12px;
-  font-size: 16px;
-  width: 100%;
-  margin-bottom: 12px;
-  border-radius: 8px;
-  border: none;
-  background: rgba(255, 255, 255, 0.15); /* Soft translucent white */
-  color: white;
-  text-align: center;
-  font-weight: 400;
-  outline: none;
-}
-
-.password-container input::placeholder {
-  color: rgba(255, 255, 255, 0.7);
-}
-
-.password-container button {
-  background: #111;
-  color: white;
-  border: none;
-  padding: 12px 18px;
-  font-size: 16px;
-  font-weight: 600;
-  text-transform: uppercase;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.password-container button:hover {
-  background: #444;
-  box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.2);
-}
-
-/* Error state */
-#error-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background-color: #DD1101; /* Entire screen turns red */
-  display: none;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  z-index: 10000;
-}
-
-#error-message {
-  color: white;
-  font-size: 28px;
-  font-weight: 700;
-  text-transform: uppercase;
-}
     * {
       margin: 0;
       padding: 0;
@@ -140,20 +24,38 @@ section.active {
     body {
       background-color: #D8D0B8;
       color: #111;
+      overflow-x: hidden;
+    }
+
+    #password-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background-color: #D8D0B8;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh;
+      z-index: 9999;
+    }
+
+    .password-container {
+      background: linear-gradient(180deg, #DD1101, #C00F00);
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      min-width: 280px;
     }
 
     nav {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  font-size: 14px;
-  z-index: 1000; /* Add this line */
-}
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      font-size: 14px;
+      z-index: 1000;
+    }
 
     nav a {
       margin-left: 15px;
@@ -168,188 +70,146 @@ section.active {
 
     section {
       display: none;
-      text-align: center;
-      padding: 40px 20px;
+      padding: 80px 20px 20px;
       width: 100%;
-      max-width: 600px;
+      max-width: 1200px;
+      margin: 0 auto;
     }
 
     section.active {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
+      display: block;
     }
 
-    h1 {
-      font-size: 28px;
-      margin-bottom: 20px;
+    #maison {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
     }
 
-    p {
-      font-size: 16px;
-      line-height: 1.6;
-    }
-
-   .concepts-list {
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Centers items horizontally */
-  justify-content: center; /* Centers vertically */
-  height: 100vh; /* Full screen height */
-  width: 100%; /* Ensures it takes up full width */
-  text-align: center; /* Ensures text is centered */
-}
-
-.concepts-list a {
-  display: block;
-  margin: 10px 0;
-  text-decoration: none;
-  color: #111;
-  font-size: 18px;
-}
-
-.concepts-list a:hover {
-  color: #555;
-}
-    }
-
-    .shop-message, .about-header {
-      margin-bottom: 30px;
+    #maison.active {
+      opacity: 1;
     }
 
     .logo {
-      margin-bottom: 2px;
-      max-width: 300px;
+      max-width: min(300px, 90%);
+      margin-bottom: 20px;
     }
 
     .brand-name {
-      width: 180px;
-      margin-bottom: 100px;
+      width: min(180px, 70%);
+    }
+
+    .concepts-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      padding: 40px 20px;
+    }
+
+    .concepts-list a {
+      text-decoration: none;
+      color: #111;
+      font-size: 18px;
+      text-align: center;
+      padding: 10px;
+      border: 1px solid transparent;
+      transition: all 0.3s ease;
+    }
+
+    .concepts-list a:hover {
+      border-color: #111;
     }
 
     .concept-container {
-      text-align: left;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .carousel {
+      position: relative;
       width: 100%;
+      overflow: hidden;
+      margin: 20px 0;
+    }
+
+    .carousel-inner {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+
+    .carousel-item {
+      min-width: 100%;
+      position: relative;
+      text-align: center;
+    }
+
+    .carousel-item img {
+      width: 100%;
+      max-width: 800px;
+      height: auto;
+      margin: 0 auto;
+      display: block;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .carousel-item.active img {
+      opacity: 1;
+    }
+
+    .carousel-control {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.5);
+      color: white;
+      padding: 10px;
+      cursor: pointer;
+      z-index: 100;
+    }
+
+    .carousel-control.prev {
+      left: 10px;
+    }
+
+    .carousel-control.next {
+      right: 10px;
+    }
+
+    #error-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background-color: #DD1101;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+    }
+
+    .manifesto-container {
       max-width: 600px;
+      margin: 0 auto;
+      padding: 40px 20px;
     }
 
-    .concept-container h2 {
-      margin-bottom: 10px;
+    .manifesto {
+      text-align: right;
+      font-size: 18px;
+      line-height: 1.4;
+      margin-bottom: 30px;
     }
 
-    .concept-container p {
-      margin-bottom: 10px;
-    }
-
-    /* Red email links to match the logo */
     .contact-email {
       color: #de1201;
       font-weight: bold;
     }
-#maison {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -40%);
-  width: 100%;
-  height: auto;
-  opacity: 0;
-  transition: opacity 0.5s ease-in-out;
-  pointer-events: auto;
-}
-
-#maison.active {
-  opacity: 1;
-}
-
-#maison.hidden {
-  display: none; /* Instantly disappears when another section is clicked */
-}
-.concept-container {
-  text-align: left;
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 40px 20px;
-}
-
-#concept-title {
-  text-align: center;
-  font-size: 26px;
-  font-weight: 700;
-  margin-bottom: 10px;
-}
-
-.concept-subtitle {
-  text-align: center;
-  font-size: 18px;
-  font-weight: 400;
-  color: #666;
-  margin-bottom: 15px;
-}
-
-.concept-image {
-  width: 100%;
-  max-width: 500px;
-  margin: 20px auto;
-  display: block;
-  border-radius: 5px;
-}
-
-.concept-edition,
-.concept-price {
-  text-align: center;
-  font-size: 18px;
-  font-weight: 500;
-  margin: 10px 0;
-}
-
-.concept-description {
-  font-size: 16px;
-  line-height: 1.6;
-  margin-bottom: 15px;
-}
-
-.concept-future-editions {
-  font-size: 14px;
-  color: #777;
-  text-align: center;
-  font-style: italic;
-}
-
-.concept-purchase {
-  text-align: center;
-  font-size: 16px;
-  margin-top: 20px;
-}
-
-.contact-email {
-  color: #de1201;
-  font-weight: bold;
-  text-decoration: none;
-}
-
-.contact-email:hover {
-  text-decoration: underline;
-}
-.concept-images {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 15px;
-  margin: 20px 0;
-}
-
-.concept-images img {
-  width: 100%;
-  max-width: 400px;
-  border-radius: 5px;
-  display: block;
-}
   </style>
 </head>
 <body>
@@ -358,15 +218,15 @@ section.active {
       <h2>Mot de passe</h2>
       <input type="password" id="password-input" placeholder="Entrez le mot de passe">
       <button onclick="checkPassword()">Entrer</button>
-      <p id="error-message" style="color: red; display: none;">Mot de passe incorrect</p>
     </div>
   </div>
-<nav>
-  <a href="#" onclick="showSection('maison'); return false;">Maison</a>
-  <a href="#" onclick="showSection('concepts'); return false;">Concepts</a>
-  <a href="#" onclick="showSection('manifeste'); return false;">Manifeste</a>
-  <a href="#" onclick="showSection('contact'); return false;">Contact</a>
-</nav>
+
+  <nav>
+    <a href="#" onclick="showSection('maison')">Maison</a>
+    <a href="#" onclick="showSection('concepts')">Concepts</a>
+    <a href="#" onclick="showSection('manifeste')">Manifeste</a>
+    <a href="#" onclick="showSection('contact')">Contact</a>
+  </nav>
 
   <section id="maison" class="active">
     <img src="logo.png" alt="Logo" class="logo">
@@ -374,390 +234,202 @@ section.active {
   </section>
 
   <section id="concepts">
-    <div class="concepts-list">
-        <a href="#" onclick="showConcept('cadavre-exquis'); return false;">001 Cadavre Exquis</a>
-        <a href="#" onclick="showConcept('noeud-nu'); return false;">002 Nœud Nu</a>
-        <a href="#" onclick="showConcept('glaciere'); return false;">003 Glacière</a>
-        <a href="#" onclick="showConcept('fige'); return false;">004 Figé</a>
-        <a href="#" onclick="showConcept('ligne-de-flottaison'); return false;">005 Ligne de Flottaison</a>
-        <a href="#" onclick="showConcept('faux-pas'); return false;">006 Faux Pas</a>
-        <a href="#" onclick="showConcept('quatre-yeux'); return false;">007 Quatre Yeux</a>
-        <a href="#" onclick="showConcept('assassine'); return false;">008 Assassiné</a>
-        <a href="#" onclick="showConcept('cameleon'); return false;">009 Caméléon</a>
-        <a href="#" onclick="showConcept('lautre-moitie'); return false;">010 L’Autre Moitié</a>
-        <a href="#" onclick="showConcept('bonbonniere'); return false;">011 Bonbonnière</a>
-    </div>
-</section>
+    <div class="concepts-list"></div>
+  </section>
 
-  <!-- Concept Pages -->
-  <section id="concept-page" class="concept-container">
-  <h2 id="concept-title"></h2>
-  <p id="concept-subtitle" class="concept-subtitle"></p> <!-- New subtitle -->
- <div id="concept-images" class="concept-images"></div> <!-- Dynamic Image Container -->
-  <p id="concept-edition" class="concept-edition"></p>
-  <p id="concept-price" class="concept-price"></p>
-  <p id="concept-description"></p>
-  <p id="concept-future-editions" class="concept-future-editions"></p>
-
-  <p class="concept-purchase">
-    <strong>For purchase:</strong> Email your name, quantity, variation (if applicable), and size to  
-    <a href="mailto:shop@champsmag.com" class="contact-email">shop@champsmag.com</a>
-  </p>
-</section>
+  <section id="concept-page" class="concept-container"></section>
 
   <section id="manifeste">
-    
-    <style>
-    .manifesto-container {
-        max-width: 600px; /* Keeps the width tight for elegance */
-        margin: 0 auto;
-        padding-top:0px; /* Pushes content down to avoid overlap */
-    }
-
-    .manifesto-title {
-        text-align: right; /* Matches the manifesto text */
-        font-size: 22px; /* Larger than body text for hierarchy */
-        font-weight: 500; /* Makes the title stand out */
-        margin-bottom: 40px; /* Spacing below title for luxury feel */
-    }
-
-    .manifesto {
-        text-align: right;
-        font-size: 18px;
-        font-weight: 400;
-        letter-spacing: 0.5px;
-        line-height: 1.4;
-        margin-bottom: 30px;
-    }
-</style>
-
-<div class="manifesto-container">
-    
-
-    <p class="manifesto">
-        Surrealism was born after war. After collapse. After the world proved itself untrustworthy. It is happening again.
-    </p>
-
-    <p class="manifesto">
-        The reaction is fear. Rigid borders. Tight uniforms. Forced nostalgia for a past that never existed.
-    </p>
-
-    <p class="manifesto">
-        Fashion is a tool of control. So we weaponize it. We take what is fixed and make it move. We take what is obedient and break it.
-    </p>
-
-    <p class="manifesto">
-        André Breton and Philippe Soupault approached language instinctively. Subversively. Irreversibly. We do the same with objects.
-    </p>
-
-    <p class="manifesto">
-        Les Champs Magnétiques is not an aesthetic. It is a reaction. A reminder: nothing is beyond disruption.
-    </p>
-
-    <p class="manifesto">
-        History repeats. But we refuse to wear its costume.
-    </p>
-</div>
-    
+    <div class="manifesto-container">
+      <p class="manifesto">Surrealism was born after war. After collapse. After the world proved itself untrustworthy. It is happening again.</p>
+      <p class="manifesto">The reaction is fear. Rigid borders. Tight uniforms. Forced nostalgia for a past that never existed.</p>
+      <p class="manifesto">Fashion is a tool of control. So we weaponize it. We take what is fixed and make it move. We take what is obedient and break it.</p>
+      <p class="manifesto">André Breton and Philippe Soupault approached language instinctively. Subversively. Irreversibly. We do the same with objects.</p>
+      <p class="manifesto">Les Champs Magnétiques is not an aesthetic. It is a reaction. A reminder: nothing is beyond disruption.</p>
+      <p class="manifesto">History repeats. But we refuse to wear its costume.</p>
+    </div>
   </section>
 
   <section id="contact">
-    
     <p>For inquiries, please email <a href="mailto:contact@champsmag.com" class="contact-email">contact@champsmag.com</a></p>
   </section>
 
-  <script>
-    function showSection(sectionId) {
-    // Hide all sections
-    document.querySelectorAll("section").forEach(section => {
-        section.classList.remove("active");
-    });
+  <div id="error-overlay">
+    <p id="error-message">Non-lieu</p>
+  </div>
 
-    // If we're showing "maison," ensure it remains visible
-    if (sectionId === "maison") {
-        document.getElementById("maison").classList.remove("hidden"); 
-        document.getElementById("maison").classList.add("active"); 
-    } else {
-        document.getElementById("maison").classList.add("hidden"); // Hide Maison when switching sections
+  <script>
+    const concepts = {
+  "cadavre-exquis": {
+    "title": "001 Cadavre Exquis",
+    "description": "A reverse weave sweatshirt with fragmented lettering, cut from found T-shirts.",
+    "edition": "One of one.",
+    "price": "$2,600",
+    "future_editions": "A limited run of 260 recreations may be produced in the future, priced at $260 each."
+  },
+  "noeud-nu": {
+    "title": "002 Nœud Nu",
+    "description": "A wing-collared tuxedo shirt with a bowtie removed at the structural level.",
+    "edition": "One of one.",
+    "price": "$2,600",
+    "future_editions": "A limited run of 260 recreations may be produced in the future, priced at $260 each."
+  },
+  "glaciere": {
+    "title": "003 Glacière",
+    "description": "An Arctic Ice bag, made rigid and repurposed as a jewelry box.",
+    "edition": "One of one.",
+    "price": "$2,600",
+    "future_editions": "A limited run of 260 recreations may be produced in the future, priced at $260 each."
+  },
+  "fige": {
+    "title": "004 Figé",
+    "description": "High-gloss heels, fused to their own base plate.",
+    "edition": "One of one.",
+    "price": "$2,600",
+    "future_editions": "A limited run of 26 recreations may be produced in the future, priced at $260 each."
+  },
+  "ligne-de-flottaison": {
+    "title": "005 Ligne de Flottaison",
+    "description": "A T-shirt with a joke that reveals its punchline when soaked.",
+    "edition": "One of one.",
+    "price": "$2,600",
+    "future_editions": "A limited run of 260 recreations may be produced in the future, priced at $260 each."
+  },
+  "faux-pas": {
+    "title": "006 Faux Pas",
+    "description": "Sculpted bear claw gloves in gloss black.",
+    "edition": "One of one pair.",
+    "price": "$2,600",
+    "future_editions": "A limited run of 260 recreations may be produced in the future, priced at $260 each."
+  },
+  "quatre-yeux": {
+    "title": "007 Quatre Yeux",
+    "description": "A pair of sunglasses with four overlapping lenses.",
+    "edition": "One of one.",
+    "price": "$2,600",
+    "future_editions": "A limited run of 260 recreations may be produced in the future, priced at $260 each."
+  },
+  "assassine": {
+    "title": "008 Assassiné",
+    "description": "A white dress shirt with a single gunshot hole, embroidered in beaded blood.",
+    "edition": "One of one.",
+    "price": "$2,600",
+    "future_editions": "A limited run of 260 recreations may be produced in the future, priced at $260 each."
+  },
+  "cameleon": {
+    "title": "009 Caméléon",
+    "description": "A trench coat printed with the exact surface of [INSERT INTERSECTION].",
+    "edition": "One of one.",
+    "price": "$2,600",
+    "future_editions": "A limited run of 260 recreations may be produced in the future, priced at $260 each."
+  },
+  "lautre-moitie": {
+    "title": "010 L’Autre Moitié",
+    "description": "A divided photograph, printed onto two T-shirts. Must be sold separately.",
+    "edition": "One of two.",
+    "price": "$2,600 each.",
+    "future_editions": "A limited run of 260 recreations may be produced in the future, priced at $260 each."
+  },
+  "bonbonniere": {
+    "title": "011 Bonbonnière",
+    "description": "A metal cigarette, drilled to hold a lollipop stick.",
+    "edition": "One of one.",
+    "price": "$2,600",
+    "future_editions": "A limited run of 260 recreations may be produced in the future, priced at $260 each."
+  }
+};
+
+    let currentCarouselIndex = 0;
+
+    function initCarousel(images) {
+      const carouselHTML = `
+        <div class="carousel">
+          <div class="carousel-inner">
+            ${images.map((img, index) => `
+              <div class="carousel-item ${index === 0 ? 'active' : ''}">
+                <img src="${img}" onerror="this.style.display='none'">
+              </div>
+            `).join('')}
+          </div>
+          ${images.length > 1 ? `
+            <div class="carousel-control prev" onclick="changeSlide(-1)">‹</div>
+            <div class="carousel-control next" onclick="changeSlide(1)">›</div>
+          ` : ''}
+        </div>
+      `;
+      return carouselHTML;
     }
 
-    // Show the requested section
-    document.getElementById(sectionId).classList.add("active");
-}
+    function changeSlide(direction) {
+      const items = document.querySelectorAll('.carousel-item');
+      currentCarouselIndex = (currentCarouselIndex + direction + items.length) % items.length;
+      document.querySelector('.carousel-inner').style.transform = `translateX(-${currentCarouselIndex * 100}%)`;
+      items.forEach(item => item.classList.remove('active'));
+      items[currentCarouselIndex].classList.add('active');
+    }
 
     function showConcept(conceptId) {
-    const concepts = {
-        "cadavre-exquis": {
-            "title": "001 Cadavre Exquis",
-            "subtitle": "Fragmented lettering meets reverse weave.",
-            "description": "A reverse weave sweatshirt with fragmented lettering, cut from found T-shirts.",
-            "edition": "One of one.",
-            "price": "$2,600",
-            "future_editions": "A limited run of 260 recreations may be produced in the future, priced at $260 each.",
-            "images": [
-                "images/cadavre-exquis-1.jpg",
-                "images/cadavre-exquis-2.jpg",
-                "images/cadavre-exquis-3.jpg"
-            ]
-        },
-        "noeud-nu": {
-            "title": "002 Nœud Nu",
-            "subtitle": "The absence of a bowtie as structure.",
-            "description": "A wing-collared tuxedo shirt with a bowtie removed at the structural level.",
-            "edition": "One of one.",
-            "price": "$2,600",
-            "future_editions": "A limited run of 260 recreations may be produced in the future, priced at $260 each.",
-            "images": [
-                "images/noeud-nu-1.jpg",
-                "images/noeud-nu-2.jpg",
-                "images/noeud-nu-3.jpg",
-                "images/noeud-nu-4.jpg",
-                "images/noeud-nu-5.jpg"
-            ]
-        },
-        "glaciere": {
-            "title": "003 Glacière",
-            "subtitle": "An Arctic Ice bag transformed into a jewelry box.",
-            "description": "An Arctic Ice bag, made rigid and repurposed as a jewelry box.",
-            "edition": "One of one.",
-            "price": "$2,600",
-            "future_editions": "A limited run of 260 recreations may be produced in the future, priced at $260 each.",
-            "images": [
-                "images/glaciere-1.jpg",
-                "images/glaciere-2.jpg"
-            ]
-        },
-        "fige": {
-            "title": "004 Figé",
-            "subtitle": "High-gloss heels, fused to their own base plate.",
-            "description": "A pair of high-gloss heels, sculpted and permanently fused to a base plate.",
-            "edition": "One of one.",
-            "price": "$2,600",
-            "future_editions": "A limited run of 26 recreations may be produced in the future, priced at $260 each.",
-            "images": [
-                "images/fige-1.jpg",
-                "images/fige-2.jpg",
-                "images/fige-3.jpg"
-            ]
-        },
-        "ligne-de-flottaison": {
-            "title": "005 Ligne de Flottaison",
-            "subtitle": "A joke that only appears when soaked.",
-            "description": "A T-shirt featuring a joke whose punchline reveals itself when wet.",
-            "edition": "One of one.",
-            "price": "$2,600",
-            "future_editions": "A limited run of 260 recreations may be produced in the future, priced at $260 each.",
-            "images": [
-                "images/ligne-de-flottaison-1.jpg",
-                "images/ligne-de-flottaison-2.jpg"
-            ]
-        },
-        "faux-pas": {
-            "title": "006 Faux Pas",
-            "subtitle": "Sculpted bear claw gloves in gloss black.",
-            "description": "A set of sculpted bear claw gloves, cast in glossy black resin.",
-            "edition": "One of one pair.",
-            "price": "$2,600",
-            "future_editions": "A limited run of 260 recreations may be produced in the future, priced at $260 each.",
-            "images": [
-                "images/faux-pas-1.jpg",
-                "images/faux-pas-2.jpg",
-                "images/faux-pas-3.jpg"
-            ]
-        },
-        "quatre-yeux": {
-            "title": "007 Quatre Yeux",
-            "subtitle": "A pair of sunglasses with four overlapping lenses.",
-            "description": "A pair of handcrafted sunglasses featuring four overlapping lenses, offering a surreal visual experience.",
-            "edition": "One of one.",
-            "price": "$2,600",
-            "future_editions": "A limited run of 260 recreations may be produced in the future, priced at $260 each.",
-            "images": [
-                "images/quatre-yeux-1.jpg",
-                "images/quatre-yeux-2.jpg"
-            ]
-        },
-        "assassine": {
-            "title": "008 Assassiné",
-            "subtitle": "A white dress shirt with a single gunshot hole, embroidered in beaded blood.",
-            "description": "A pristine white dress shirt featuring a single embroidered gunshot hole with detailed beaded blood.",
-            "edition": "One of one.",
-            "price": "$2,600",
-            "future_editions": "A limited run of 260 recreations may be produced in the future, priced at $260 each.",
-            "images": [
-                "images/assassine-1.jpg",
-                "images/assassine-2.jpg",
-                "images/assassine-3.jpg",
-                "images/assassine-4.jpg"
-            ]
-        },
-        "cameleon": {
-            "title": "009 Caméléon",
-            "subtitle": "A trench coat printed with the exact surface of its surroundings.",
-            "description": "A trench coat printed with the exact photographic texture of a specific intersection, blending seamlessly into its environment.",
-            "edition": "One of one.",
-            "price": "$2,600",
-            "future_editions": "A limited run of 260 recreations may be produced in the future, priced at $260 each.",
-            "images": [
-                "images/cameleon-1.jpg",
-                "images/cameleon-2.jpg",
-                "images/cameleon-3.jpg"
-            ]
-        },
-        "lautre-moitie": {
-            "title": "010 L’Autre Moitié",
-            "subtitle": "A divided photograph, printed onto two T-shirts. Must be sold separately.",
-            "description": "A large-format photograph, split across two separate T-shirts, requiring both halves to complete the image.",
-            "edition": "One of two.",
-            "price": "$2,600 each.",
-            "future_editions": "A limited run of 260 recreations may be produced in the future, priced at $260 each.",
-            "images": [
-                "images/lautre-moitie-1.jpg",
-                "images/lautre-moitie-2.jpg",
-                "images/lautre-moitie-3.jpg"
-            ]
-        },
-        "bonbonniere": {
-            "title": "011 Bonbonnière",
-            "subtitle": "A metal cigarette, drilled to hold a lollipop stick.",
-            "description": "A reimagined cigarette, cast in metal and modified to hold a lollipop stick, transforming the act of smoking into something playful and subversive.",
-            "edition": "One of one.",
-            "price": "$2,600",
-            "future_editions": "A limited run of 260 recreations may be produced in the future, priced at $260 each.",
-            "images": [
-                "images/bonbonniere-1.jpg",
-                "images/bonbonniere-2.jpg",
-                "images/bonbonniere-3.jpg"
-            ]
-        }
-    };
+      const concept = concepts[conceptId];
+      if (!concept) return;
 
-    if (concepts[conceptId]) {
-    document.getElementById("concept-title").innerText = concepts[conceptId].title;
-    document.getElementById("concept-subtitle").innerText = concepts[conceptId].subtitle;
-    document.getElementById("concept-description").innerText = concepts[conceptId].description;
-    document.getElementById("concept-edition").innerText = concepts[conceptId].edition;
-    document.getElementById("concept-price").innerText = concepts[conceptId].price;
-    document.getElementById("concept-future-editions").innerText = concepts[conceptId].future_editions;
+      const conceptHTML = `
+        <h2>${concept.title}</h2>
+        <p class="concept-subtitle">${concept.subtitle}</p>
+        ${concept.images ? initCarousel(concept.images) : ''}
+        <p class="concept-description">${concept.description}</p>
+        <p class="concept-purchase">
+          <strong>For purchase:</strong> Email <a href="mailto:shop@champsmag.com" class="contact-email">shop@champsmag.com</a>
+        </p>
+        <button onclick="showSection('concepts')">Back to Concepts</button>
+      `;
 
-    let conceptImagesContainer = document.getElementById("concept-images");
-    conceptImagesContainer.innerHTML = ""; // Clear previous images
-
-    // ✅ Safeguard against missing images
-    if (concepts[conceptId].images && concepts[conceptId].images.length > 0) {
-        concepts[conceptId].images.forEach(imageSrc => {
-            let imgElement = document.createElement("img");
-            imgElement.src = imageSrc;
-            imgElement.alt = concepts[conceptId].title;
-            imgElement.classList.add("concept-image");
-            imgElement.onerror = function() { this.style.display = 'none'; }; // Hides broken images
-            conceptImagesContainer.appendChild(imgElement);
-        });
+      document.getElementById('concept-page').innerHTML = conceptHTML;
+      showSection('concept-page');
     }
 
-    showSection("concept-page");
-};
-
-    if (concepts[conceptId]) {
-        document.getElementById("concept-title").innerText = concepts[conceptId].title;
-        document.getElementById("concept-subtitle").innerText = concepts[conceptId].subtitle;
-        document.getElementById("concept-description").innerText = concepts[conceptId].description;
-        document.getElementById("concept-edition").innerText = concepts[conceptId].edition;
-        document.getElementById("concept-price").innerText = concepts[conceptId].price;
-        document.getElementById("concept-future-editions").innerText = concepts[conceptId].future_editions;
-
-        let conceptImagesContainer = document.getElementById("concept-images");
-        conceptImagesContainer.innerHTML = "";
-
-        if (concepts[conceptId].images) {
-            concepts[conceptId].images.forEach(imageSrc => {
-                let imgElement = document.createElement("img");
-                imgElement.src = imageSrc;
-                imgElement.classList.add("concept-image");
-                conceptImagesContainer.appendChild(imgElement);
-            });
-        }
-
-        showSection("concept-page");
+    function showSection(sectionId) {
+      document.querySelectorAll('section').forEach(section => {
+        section.classList.remove('active');
+        section.style.display = 'none';
+      });
+      const section = document.getElementById(sectionId);
+      if (section) {
+        section.classList.add('active');
+        section.style.display = 'block';
+      }
+      if (sectionId === 'concepts') initConceptList();
     }
-};
 
-      if (concepts[conceptId]) {
-    document.getElementById("concept-title").innerText = concepts[conceptId].title;
-    document.getElementById("concept-description").innerText = concepts[conceptId].description;
-    document.getElementById("concept-edition").innerText = concepts[conceptId].edition;
-
-    // ADD THESE TWO LINES
-    document.getElementById("concept-price").innerText = concepts[conceptId].price; 
-    document.getElementById("concept-future-editions").innerText = concepts[conceptId].future_editions;
-
-    showSection("concept-page");
-}
+    function initConceptList() {
+      const list = document.querySelector('.concepts-list');
+      list.innerHTML = Object.keys(concepts).map(key => `
+        <a href="#" onclick="showConcept('${key}')">${concepts[key].title}</a>
+      `).join('');
     }
-  </script>
-  <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    if (localStorage.getItem("authenticated") === "true") {
-        document.getElementById("password-overlay").style.display = "none";
-        showSection("maison"); // Ensure Maison is the active section
-    }
-});
 
-function checkPassword() {
-    const correctPassword = "cecin'estpasunmotdepasse";
-    const userInput = document.getElementById("password-input");
-
-    if (userInput.value === correctPassword) {
-        localStorage.setItem("authenticated", "true");
-        document.getElementById("password-overlay").style.display = "none";
-        showSection("maison"); // Ensure correct section is displayed after authentication
-    } else {
-        document.getElementById("error-overlay").style.display = "flex";
+    function checkPassword() {
+      const correctPassword = "cecin'estpasunmotdepasse";
+      const input = document.getElementById('password-input');
+      if (input.value === correctPassword) {
+        localStorage.setItem('authenticated', 'true');
+        document.getElementById('password-overlay').style.display = 'none';
+        showSection('maison');
+      } else {
+        document.getElementById('error-overlay').style.display = 'flex';
         setTimeout(() => {
-            document.getElementById("error-overlay").style.display = "none";
-            userInput.value = ""; // Clears the input field
-            userInput.placeholder = "Entrez le mot de passe"; // Resets the placeholder text
+          document.getElementById('error-overlay').style.display = 'none';
+          input.value = '';
         }, 1500);
+      }
     }
-}
 
-function showSection(sectionId) {
-    // Hide all sections first
-    document.querySelectorAll("section").forEach(section => {
-        section.classList.remove("active");
-        section.style.display = "none"; // Ensure they are hidden
+    document.addEventListener('DOMContentLoaded', () => {
+      if (localStorage.getItem('authenticated') === 'true') {
+        document.getElementById('password-overlay').style.display = 'none';
+        showSection('maison');
+      }
+      initConceptList();
     });
-
-    // Show the requested section
-    const targetSection = document.getElementById(sectionId);
-    if (targetSection) {
-        targetSection.classList.add("active");
-        targetSection.style.display = "flex"; // Ensure it becomes visible
-    }
-}
-
-// Re-add event listeners every time the DOM loads
-document.addEventListener("DOMContentLoaded", function () {
-    if (localStorage.getItem("authenticated") === "true") {
-        document.getElementById("password-overlay").style.display = "none";
-        showSection("maison"); // Show the home section by default
-    }
-
-    // Ensure navigation buttons always work
-    document.querySelectorAll("nav a").forEach(link => {
-    link.addEventListener("click", function (event) {
-        event.preventDefault();
-        let sectionId = this.getAttribute("onclick").match(/'([^']+)'/)[1];
-        if (sectionId !== "concept-page") {
-            showSection(sectionId);
-        }
-    });
-});
-});
-
-</script>
-<div id="error-overlay">
-  <p id="error-message">Non-lieu</p>
-</div>
+  </script>
 </body>
 </html>
