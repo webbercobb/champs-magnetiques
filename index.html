@@ -465,7 +465,7 @@
   document.addEventListener("DOMContentLoaded", function () {
     if (localStorage.getItem("authenticated") === "true") {
         document.getElementById("password-overlay").style.display = "none";
-        showSection("maison"); // Ensures Maison is the active section
+        showSection("maison"); // Ensure Maison is the active section
     }
 });
 
@@ -485,19 +485,19 @@ function checkPassword() {
     }
 }
 
-  function showSection(sectionId) {
-  document.querySelectorAll("section").forEach(section => {
-    section.classList.remove("active");
-    section.style.display = "none"; // Hide all sections
-  });
+function showSection(sectionId) {
+    document.querySelectorAll("section").forEach(section => {
+        section.classList.remove("active");
+        section.style.display = "none"; // Hide all sections
+    });
 
-  const activeSection = document.getElementById(sectionId);
-  if (activeSection) {
-    activeSection.classList.add("active");
-    activeSection.style.display = "flex"; // Make it visible
-  }
+    const activeSection = document.getElementById(sectionId);
+    if (activeSection) {
+        activeSection.classList.add("active");
+        activeSection.style.display = "flex"; // Ensure it becomes visible
+    }
 }
-}
+
 </script>
 <div id="error-overlay">
   <p id="error-message">Non-lieu</p>
