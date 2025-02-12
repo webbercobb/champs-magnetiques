@@ -374,21 +374,20 @@ section.active {
   </section>
 
   <section id="concepts">
-    
     <div class="concepts-list">
-      <a href="#" onclick="showConcept('cadavre-exquis')">001 Cadavre Exquis</a>
-      <a href="#" onclick="showConcept('noeud-nu')">002 Nœud Nu</a>
-      <a href="#" onclick="showConcept('glaciere')">003 Glacière</a>
-      <a href="#" onclick="showConcept('fige')">004 Figé</a>
-      <a href="#" onclick="showConcept('ligne-de-flottaison')">005 Ligne de Flottaison</a>
-      <a href="#" onclick="showConcept('faux-pas')">006 Faux Pas</a>
-      <a href="#" onclick="showConcept('quatre-yeux')">007 Quatre Yeux</a>
-      <a href="#" onclick="showConcept('assassine')">008 Assassiné</a>
-      <a href="#" onclick="showConcept('cameleon')">009 Caméléon</a>
-      <a href="#" onclick="showConcept('lautre-moitie')">010 L’Autre Moitié</a>
-      <a href="#" onclick="showConcept('bonbonniere')">011 Bonbonnière</a>
+        <a href="#" onclick="showConcept('cadavre-exquis'); return false;">001 Cadavre Exquis</a>
+        <a href="#" onclick="showConcept('noeud-nu'); return false;">002 Nœud Nu</a>
+        <a href="#" onclick="showConcept('glaciere'); return false;">003 Glacière</a>
+        <a href="#" onclick="showConcept('fige'); return false;">004 Figé</a>
+        <a href="#" onclick="showConcept('ligne-de-flottaison'); return false;">005 Ligne de Flottaison</a>
+        <a href="#" onclick="showConcept('faux-pas'); return false;">006 Faux Pas</a>
+        <a href="#" onclick="showConcept('quatre-yeux'); return false;">007 Quatre Yeux</a>
+        <a href="#" onclick="showConcept('assassine'); return false;">008 Assassiné</a>
+        <a href="#" onclick="showConcept('cameleon'); return false;">009 Caméléon</a>
+        <a href="#" onclick="showConcept('lautre-moitie'); return false;">010 L’Autre Moitié</a>
+        <a href="#" onclick="showConcept('bonbonniere'); return false;">011 Bonbonnière</a>
     </div>
-  </section>
+</section>
 
   <!-- Concept Pages -->
   <section id="concept-page" class="concept-container">
@@ -642,6 +641,31 @@ section.active {
         document.getElementById("concept-future-editions").innerText = concepts[conceptId].future_editions;
 
         let conceptImagesContainer = document.getElementById("concept-images");
+        conceptImagesContainer.innerHTML = ""; // Clear previous images
+
+        if (concepts[conceptId].images && concepts[conceptId].images.length > 0) {
+            concepts[conceptId].images.forEach(imageSrc => {
+                let imgElement = document.createElement("img");
+                imgElement.src = imageSrc;
+                imgElement.alt = concepts[conceptId].title;
+                imgElement.classList.add("concept-image");
+                conceptImagesContainer.appendChild(imgElement);
+            });
+        }
+
+        showSection("concept-page");
+    }
+};
+
+    if (concepts[conceptId]) {
+        document.getElementById("concept-title").innerText = concepts[conceptId].title;
+        document.getElementById("concept-subtitle").innerText = concepts[conceptId].subtitle;
+        document.getElementById("concept-description").innerText = concepts[conceptId].description;
+        document.getElementById("concept-edition").innerText = concepts[conceptId].edition;
+        document.getElementById("concept-price").innerText = concepts[conceptId].price;
+        document.getElementById("concept-future-editions").innerText = concepts[conceptId].future_editions;
+
+        let conceptImagesContainer = document.getElementById("concept-images");
         conceptImagesContainer.innerHTML = "";
 
         if (concepts[conceptId].images) {
@@ -720,12 +744,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Ensure navigation buttons always work
     document.querySelectorAll("nav a").forEach(link => {
-        link.addEventListener("click", function (event) {
-            event.preventDefault();
-            const sectionId = this.getAttribute("onclick").match(/'([^']+)'/)[1];
+    link.addEventListener("click", function (event) {
+        event.preventDefault();
+        let sectionId = this.getAttribute("onclick").match(/'([^']+)'/)[1];
+        if (sectionId !== "concept-page") {
             showSection(sectionId);
-        });
+        }
     });
+});
 });
 
 </script>
