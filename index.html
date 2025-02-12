@@ -404,9 +404,12 @@
       const concept = concepts[conceptId];
       if (!concept) return;
 
+      // Add empty images array to concepts that don't have it
+      const images = concept.images || [];
+      
       const conceptHTML = `
         <h2>${concept.title}</h2>
-        ${concept.images ? initCarousel(concept.images) : ''}
+        ${images.length > 0 ? initCarousel(images) : ''}
         <p>${concept.description}</p>
         <p>${concept.edition}</p>
         <p><strong>${concept.price}</strong></p>
@@ -418,8 +421,25 @@
       document.getElementById('concept-page').innerHTML = conceptHTML;
       showSection('concept-page');
     }
-      }
-  </script>
+</script>
+
+<!-- Fix the showSection function in the second script tag -->
+<script>
+    function showSection(sectionId) {
+        // Hide all sections
+        document.querySelectorAll("section").forEach(section => {
+            section.classList.remove("active");
+            section.style.display = "none";
+        });
+
+        // Show requested section
+        const targetSection = document.getElementById(sectionId);
+        if (targetSection) {
+            targetSection.classList.add("active");
+            targetSection.style.display = "flex";
+        }
+    }
+</script>
   <script>
   document.addEventListener("DOMContentLoaded", function () {
     if (localStorage.getItem("authenticated") === "true") {
