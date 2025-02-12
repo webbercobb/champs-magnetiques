@@ -483,19 +483,15 @@
   }
 
   function showSection(sectionId) {
-    document.querySelectorAll("section").forEach(section => {
-      section.classList.remove("active");
-    });
+  document.querySelectorAll("section").forEach(section => {
+    section.style.display = "none"; // Hide all sections
+  });
 
-    if (sectionId === "maison") {
-      document.getElementById("maison").classList.remove("hidden"); // Make Maison reappear
-      document.getElementById("maison").classList.add("active"); 
-    } else {
-      document.getElementById("maison").classList.add("hidden"); // Hide Maison when switching sections
-    }
-
-    document.getElementById(sectionId).classList.add("active");
+  const activeSection = document.getElementById(sectionId);
+  if (activeSection) {
+    activeSection.style.display = "flex"; // Ensure it becomes visible
   }
+}
 </script>
 <div id="error-overlay">
   <p id="error-message">Non-lieu</p>
