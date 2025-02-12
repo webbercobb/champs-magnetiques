@@ -2,17 +2,17 @@
 <html lang="en">
 <head>
   <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-RJECXBWKGN"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-RJECXBWKGN');
-</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-RJECXBWKGN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-RJECXBWKGN');
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Les Champs Magnétiques</title>
-  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;700&display=swap" rel="stylesheet>
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;700&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -24,9 +24,14 @@
     body {
       background-color: #D8D0B8;
       color: #111;
-      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
     }
 
+    /* Password Overlay Styles */
     #password-overlay {
       position: fixed;
       top: 0;
@@ -49,6 +54,7 @@
       min-width: 280px;
     }
 
+    /* Navigation */
     nav {
       position: fixed;
       top: 20px;
@@ -68,24 +74,34 @@
       color: #555;
     }
 
+    /* Sections */
     section {
       display: none;
-      padding: 80px 20px 20px;
+      text-align: center;
+      padding: 40px 20px;
       width: 100%;
-      max-width: 1200px;
-      margin: 0 auto;
+      max-width: 600px;
     }
 
     section.active {
-      display: block;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
     }
 
+    /* Maison Section */
     #maison {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       position: fixed;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%);
-      text-align: center;
+      transform: translate(-50%, -40%);
+      width: 100%;
+      height: auto;
       opacity: 0;
       transition: opacity 0.5s ease-in-out;
     }
@@ -95,40 +111,46 @@
     }
 
     .logo {
-      max-width: min(300px, 90%);
-      margin-bottom: 20px;
+      margin-bottom: 2px;
+      max-width: 300px;
     }
 
     .brand-name {
-      width: min(180px, 70%);
+      width: 180px;
+      margin-bottom: 100px;
     }
 
+    /* Concepts List */
     .concepts-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
-      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      width: 100%;
+      text-align: center;
     }
 
     .concepts-list a {
+      display: block;
+      margin: 10px 0;
       text-decoration: none;
       color: #111;
       font-size: 18px;
-      text-align: center;
-      padding: 10px;
-      border: 1px solid transparent;
-      transition: all 0.3s ease;
     }
 
     .concepts-list a:hover {
-      border-color: #111;
+      color: #555;
     }
 
+    /* Concept Page */
     .concept-container {
-      max-width: 1200px;
-      margin: 0 auto;
+      text-align: left;
+      width: 100%;
+      max-width: 600px;
     }
 
+    /* Carousel Styles */
     .carousel {
       position: relative;
       width: 100%;
@@ -153,12 +175,6 @@
       height: auto;
       margin: 0 auto;
       display: block;
-      opacity: 0;
-      transition: opacity 0.5s ease;
-    }
-
-    .carousel-item.active img {
-      opacity: 1;
     }
 
     .carousel-control {
@@ -180,6 +196,27 @@
       right: 10px;
     }
 
+    /* Manifesto */
+    .manifesto-container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding-top: 0px;
+    }
+
+    .manifesto {
+      text-align: right;
+      font-size: 18px;
+      line-height: 1.4;
+      margin-bottom: 30px;
+    }
+
+    /* Contact */
+    .contact-email {
+      color: #de1201;
+      font-weight: bold;
+    }
+
+    /* Error Overlay */
     #error-overlay {
       position: fixed;
       top: 0;
@@ -193,26 +230,16 @@
       z-index: 10000;
     }
 
-    .manifesto-container {
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 40px 20px;
-    }
-
-    .manifesto {
-      text-align: right;
-      font-size: 18px;
-      line-height: 1.4;
-      margin-bottom: 30px;
-    }
-
-    .contact-email {
-      color: #de1201;
-      font-weight: bold;
+    #error-message {
+      color: white;
+      font-size: 28px;
+      font-weight: 700;
+      text-transform: uppercase;
     }
   </style>
 </head>
 <body>
+  <!-- Password Overlay -->
   <div id="password-overlay">
     <div class="password-container">
       <h2>Mot de passe</h2>
@@ -228,13 +255,25 @@
     <a href="#" onclick="showSection('contact')">Contact</a>
   </nav>
 
+  <!-- Sections -->
   <section id="maison" class="active">
     <img src="logo.png" alt="Logo" class="logo">
     <img src="brandname.png" alt="Brand Name" class="brand-name">
   </section>
 
   <section id="concepts">
-    <div class="concepts-list"></div>
+    <div class="concepts-list">
+      <a href="#" onclick="showConcept('cadavre-exquis')">001 Cadavre Exquis</a>
+      <a href="#" onclick="showConcept('noeud-nu')">002 Nœud Nu</a>
+      <a href="#" onclick="showConcept('glaciere')">003 Glacière</a>
+      <a href="#" onclick="showConcept('fige')">004 Figé</a>
+      <a href="#" onclick="showConcept('ligne-de-flottaison')">005 Ligne de Flottaison</a>
+      <a href="#" onclick="showConcept('faux-pas')">006 Faux Pas</a>
+      <a href="#" onclick="showConcept('quatre-yeux')">007 Quatre Yeux</a>
+      <a href="#" onclick="showConcept('assassine')">008 Assassiné</a>
+      <a href="#" onclick="showConcept('cameleon')">009 Caméléon</a>
+      <a href="#" onclick="showConcept('lautre-moitie')">010 L’Autre Moitié</a>
+    </div>
   </section>
 
   <section id="concept-page" class="concept-container"></section>
@@ -265,77 +304,70 @@
     "description": "A reverse weave sweatshirt with fragmented lettering, cut from found T-shirts.",
     "edition": "One of one.",
     "price": "$2,600",
-    "future_editions": "A limited run of 260 recreations may be produced in the future, priced at $260 each."
+    "future_editions": "A limited run of 260 recreations may be produced in the future, priced at $260 each. These will be reproductions of the original artist proof, rather than individually sourced and assembled pieces. However, future editions are not guaranteed."
   },
   "noeud-nu": {
     "title": "002 Nœud Nu",
     "description": "A wing-collared tuxedo shirt with a bowtie removed at the structural level.",
     "edition": "One of one.",
     "price": "$2,600",
-    "future_editions": "A limited run of 260 recreations may be produced in the future, priced at $260 each."
+    "future_editions": "A limited run of 260 recreations may be produced in the future, priced at $260 each. These will be reproductions of the original artist proof, rather than individually sourced and assembled pieces. However, future editions are not guaranteed."
   },
   "glaciere": {
     "title": "003 Glacière",
     "description": "An Arctic Ice bag, made rigid and repurposed as a jewelry box.",
     "edition": "One of one.",
     "price": "$2,600",
-    "future_editions": "A limited run of 260 recreations may be produced in the future, priced at $260 each."
+    "future_editions": "A limited run of 260 recreations may be produced in the future, priced at $260 each. These will be reproductions of the original artist proof, rather than individually sourced and assembled pieces. However, future editions are not guaranteed."
   },
   "fige": {
     "title": "004 Figé",
     "description": "High-gloss heels, fused to their own base plate.",
     "edition": "One of one.",
     "price": "$2,600",
-    "future_editions": "A limited run of 26 recreations may be produced in the future, priced at $260 each."
+    "future_editions": "A limited run of 26 recreations may be produced in the future, priced at $260 each. These will be reproductions of the original artist proof, rather than individually sourced and assembled pieces. However, future editions are not guaranteed."
   },
   "ligne-de-flottaison": {
     "title": "005 Ligne de Flottaison",
     "description": "A T-shirt with a joke that reveals its punchline when soaked.",
     "edition": "One of one.",
     "price": "$2,600",
-    "future_editions": "A limited run of 260 recreations may be produced in the future, priced at $260 each."
+    "future_editions": "A limited run of 260 recreations may be produced in the future, priced at $260 each. These will be reproductions of the original artist proof, rather than individually sourced and assembled pieces. However, future editions are not guaranteed."
   },
   "faux-pas": {
     "title": "006 Faux Pas",
     "description": "Sculpted bear claw gloves in gloss black.",
     "edition": "One of one pair.",
     "price": "$2,600",
-    "future_editions": "A limited run of 260 recreations may be produced in the future, priced at $260 each."
+    "future_editions": "A limited run of 260 recreations may be produced in the future, priced at $260 each. These will be reproductions of the original artist proof, rather than individually sourced and assembled pieces. However, future editions are not guaranteed."
   },
   "quatre-yeux": {
     "title": "007 Quatre Yeux",
     "description": "A pair of sunglasses with four overlapping lenses.",
     "edition": "One of one.",
     "price": "$2,600",
-    "future_editions": "A limited run of 260 recreations may be produced in the future, priced at $260 each."
+    "future_editions": "A limited run of 260 recreations may be produced in the future, priced at $260 each. These will be reproductions of the original artist proof, rather than individually sourced and assembled pieces. However, future editions are not guaranteed."
   },
   "assassine": {
     "title": "008 Assassiné",
     "description": "A white dress shirt with a single gunshot hole, embroidered in beaded blood.",
     "edition": "One of one.",
     "price": "$2,600",
-    "future_editions": "A limited run of 260 recreations may be produced in the future, priced at $260 each."
+    "future_editions": "A limited run of 260 recreations may be produced in the future, priced at $260 each. These will be reproductions of the original artist proof, rather than individually sourced and assembled pieces. However, future editions are not guaranteed."
   },
   "cameleon": {
     "title": "009 Caméléon",
     "description": "A trench coat printed with the exact surface of [INSERT INTERSECTION].",
     "edition": "One of one.",
     "price": "$2,600",
-    "future_editions": "A limited run of 260 recreations may be produced in the future, priced at $260 each."
+    "future_editions": "A limited run of 260 recreations may be produced in the future, priced at $260 each. These will be reproductions of the original artist proof, rather than individually sourced and assembled pieces. However, future editions are not guaranteed."
   },
   "lautre-moitie": {
     "title": "010 L’Autre Moitié",
     "description": "A divided photograph, printed onto two T-shirts. Must be sold separately.",
     "edition": "One of two.",
     "price": "$2,600 each.",
-    "future_editions": "A limited run of 260 recreations may be produced in the future, priced at $260 each."
-  },
-  "bonbonniere": {
-    "title": "011 Bonbonnière",
-    "description": "A metal cigarette, drilled to hold a lollipop stick.",
-    "edition": "One of one.",
-    "price": "$2,600",
-    "future_editions": "A limited run of 260 recreations may be produced in the future, priced at $260 each."
+    "future_editions": "A limited run of 260 recreations may be produced in the future, priced at $260 each. These will be reproductions of the original artist proof, rather than individually sourced and assembled pieces. However, future editions are not guaranteed."
   }
 };
 
@@ -374,62 +406,83 @@
 
       const conceptHTML = `
         <h2>${concept.title}</h2>
-        <p class="concept-subtitle">${concept.subtitle}</p>
         ${concept.images ? initCarousel(concept.images) : ''}
-        <p class="concept-description">${concept.description}</p>
-        <p class="concept-purchase">
-          <strong>For purchase:</strong> Email <a href="mailto:shop@champsmag.com" class="contact-email">shop@champsmag.com</a>
-        </p>
+        <p>${concept.description}</p>
+        <p>${concept.edition}</p>
+        <p><strong>${concept.price}</strong></p>
+        <p>${concept.future_editions}</p>
+        <p><strong>For purchase:</strong> Email <a href="mailto:shop@champsmag.com" class="contact-email">shop@champsmag.com</a></p>
         <button onclick="showSection('concepts')">Back to Concepts</button>
       `;
 
       document.getElementById('concept-page').innerHTML = conceptHTML;
       showSection('concept-page');
     }
-
-    function showSection(sectionId) {
-      document.querySelectorAll('section').forEach(section => {
-        section.classList.remove('active');
-        section.style.display = 'none';
-      });
-      const section = document.getElementById(sectionId);
-      if (section) {
-        section.classList.add('active');
-        section.style.display = 'block';
       }
-      if (sectionId === 'concepts') initConceptList();
-    }
-
-    function initConceptList() {
-      const list = document.querySelector('.concepts-list');
-      list.innerHTML = Object.keys(concepts).map(key => `
-        <a href="#" onclick="showConcept('${key}')">${concepts[key].title}</a>
-      `).join('');
-    }
-
-    function checkPassword() {
-      const correctPassword = "cecin'estpasunmotdepasse";
-      const input = document.getElementById('password-input');
-      if (input.value === correctPassword) {
-        localStorage.setItem('authenticated', 'true');
-        document.getElementById('password-overlay').style.display = 'none';
-        showSection('maison');
-      } else {
-        document.getElementById('error-overlay').style.display = 'flex';
-        setTimeout(() => {
-          document.getElementById('error-overlay').style.display = 'none';
-          input.value = '';
-        }, 1500);
-      }
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-      if (localStorage.getItem('authenticated') === 'true') {
-        document.getElementById('password-overlay').style.display = 'none';
-        showSection('maison');
-      }
-      initConceptList();
-    });
   </script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (localStorage.getItem("authenticated") === "true") {
+        document.getElementById("password-overlay").style.display = "none";
+        showSection("maison"); // Ensure Maison is the active section
+    }
+});
+
+function checkPassword() {
+    const correctPassword = "cecin'estpasunmotdepasse";
+    const userInput = document.getElementById("password-input");
+
+    if (userInput.value === correctPassword) {
+        localStorage.setItem("authenticated", "true");
+        document.getElementById("password-overlay").style.display = "none";
+        showSection("maison"); // Ensure correct section is displayed after authentication
+    } else {
+        document.getElementById("error-overlay").style.display = "flex";
+        setTimeout(() => {
+            document.getElementById("error-overlay").style.display = "none";
+            userInput.value = ""; // Clears the input field
+            userInput.placeholder = "Entrez le mot de passe"; // Resets the placeholder text
+        }, 1500);
+    }
+}
+
+function showSection(sectionId) {
+    // Hide all sections first
+    document.querySelectorAll("section").forEach(section => {
+        section.classList.remove("active");
+        section.style.display = "none"; // Ensure they are hidden
+    });
+
+    // Show the requested section
+    const targetSection = document.getElementById(sectionId);
+    if (targetSection) {
+        targetSection.classList.add("active");
+        targetSection.style.display = "flex"; // Ensure it becomes visible
+    }
+}
+
+// Re-add event listeners every time the DOM loads
+document.addEventListener("DOMContentLoaded", function () {
+    if (localStorage.getItem("authenticated") === "true") {
+        document.getElementById("password-overlay").style.display = "none";
+        showSection("maison"); // Show the home section by default
+    }
+
+    // Ensure navigation buttons always work
+    document.querySelectorAll("nav a").forEach(link => {
+        link.addEventListener("click", function (event) {
+            event.preventDefault();
+            const sectionId = this.getAttribute("onclick").match(/'([^']+)'/)[1];
+            showSection(sectionId);
+        });
+    });
+});
+
+</script>
+<div id="error-overlay">
+  <p id="error-message">Non-lieu</p>
+</div>
 </body>
 </html>
+
+    
