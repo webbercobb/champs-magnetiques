@@ -279,10 +279,10 @@ section.active {
     </div>
   </div>
 <nav>
-  <a href="#" data-section="maison">Maison</a>
-  <a href="#" data-section="concepts">Concepts</a>
-  <a href="#" data-section="manifeste">Manifeste</a>
-  <a href="#" data-section="contact">Contact</a>
+  <a href="#" onclick="showSection('maison'); return false;">Maison</a>
+  <a href="#" onclick="showSection('concepts'); return false;">Concepts</a>
+  <a href="#" onclick="showSection('manifeste'); return false;">Manifeste</a>
+  <a href="#" onclick="showSection('contact'); return false;">Contact</a>
 </nav>
 
   <section id="maison" class="active">
@@ -507,14 +507,14 @@ function showSection(sectionId) {
     // Hide all sections first
     document.querySelectorAll("section").forEach(section => {
         section.classList.remove("active");
-        section.style.display = "none"; 
+        section.style.display = "none"; // Ensure they are hidden
     });
 
-    // Make sure the correct section is displayed
-    const activeSection = document.getElementById(sectionId);
-    if (activeSection) {
-        activeSection.classList.add("active");
-        activeSection.style.display = "flex"; 
+    // Show the requested section
+    const targetSection = document.getElementById(sectionId);
+    if (targetSection) {
+        targetSection.classList.add("active");
+        targetSection.style.display = "flex"; // Ensure it becomes visible
     }
 }
 
@@ -522,10 +522,10 @@ function showSection(sectionId) {
 document.addEventListener("DOMContentLoaded", function () {
     if (localStorage.getItem("authenticated") === "true") {
         document.getElementById("password-overlay").style.display = "none";
-        document.getElementById("maison").classList.add("active");
+        showSection("maison"); // Show the home section by default
     }
 
-    // Ensure navigation always works, even after clicking Contact
+    // Ensure navigation buttons always work
     document.querySelectorAll("nav a").forEach(link => {
         link.addEventListener("click", function (event) {
             event.preventDefault();
