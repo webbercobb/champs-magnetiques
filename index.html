@@ -28,12 +28,17 @@
   }
 
   #contact {
-    display: none !important; /* Ensure it’s initially hidden */
+    display: none !important; /* Ensures it starts hidden */
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
     transform: translateY(-30px);
+}
+
+/* 🔥 ADD THIS TO FORCE CONTACT TO SHOW PROPERLY */
+#contact.active {
+    display: flex !important; /* Forces it to be visible */
 }
     #password-overlay {
   position: fixed;
