@@ -28,7 +28,7 @@
   }
 
   #contact {
-    display: none !important; /* Ensures it starts hidden */
+    display: none;  /* Start hidden */
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -36,9 +36,9 @@
     transform: translateY(-30px);
 }
 
-/* 🔥 ADD THIS TO FORCE CONTACT TO SHOW PROPERLY */
-#contact.active {
-    display: flex !important; /* Forces it to be visible */
+/* 🛠️ ADD THIS TO FIX NAVIGATION ISSUES */
+section.active {
+    display: flex !important;  /* Ensures any active section is visible */
 }
     #password-overlay {
   position: fixed;
@@ -493,27 +493,25 @@ function checkPassword() {
 }
 
 function showSection(sectionId) {
-    // Ensure all sections are fully hidden
+    // Hide all sections first
     document.querySelectorAll("section").forEach(section => {
         section.classList.remove("active");
         section.style.display = "none"; 
     });
 
-    // Make sure the selected section is properly visible
+    // Make sure the correct section is displayed
     const activeSection = document.getElementById(sectionId);
     if (activeSection) {
         activeSection.classList.add("active");
         activeSection.style.display = "flex"; 
     }
-
-    console.log(`Navigating to: ${sectionId}`); // Debugging log
 }
 
 // Re-add event listeners every time the DOM loads
 document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll("nav a").forEach(link => {
         link.addEventListener("click", function (event) {
-            event.preventDefault(); // Stop default page jumps
+            event.preventDefault(); // Stop default link behavior
             const targetSection = this.getAttribute("data-section");
             showSection(targetSection);
         });
