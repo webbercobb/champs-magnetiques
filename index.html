@@ -464,26 +464,26 @@
   <script>
   document.addEventListener("DOMContentLoaded", function () {
     if (localStorage.getItem("authenticated") === "true") {
-      document.getElementById("password-overlay").style.display = "none";
-      document.getElementById("maison").classList.add("active");
+        document.getElementById("password-overlay").style.display = "none";
+        showSection("maison"); // Ensures Maison is the active section
     }
-  });
+});
 
-  function checkPassword() {
+function checkPassword() {
     const correctPassword = "cecin'estpasunmotdepasse";
     const userInput = document.getElementById("password-input").value;
 
     if (userInput === correctPassword) {
-      localStorage.setItem("authenticated", "true");
-      document.getElementById("password-overlay").style.display = "none";
-      document.getElementById("maison").classList.add("active");
+        localStorage.setItem("authenticated", "true");
+        document.getElementById("password-overlay").style.display = "none";
+        showSection("maison"); // Ensure correct section is displayed after authentication
     } else {
-      document.getElementById("error-overlay").style.display = "flex";
-      setTimeout(() => {
-        document.getElementById("error-overlay").style.display = "none";
-      }, 1500);
+        document.getElementById("error-overlay").style.display = "flex";
+        setTimeout(() => {
+            document.getElementById("error-overlay").style.display = "none";
+        }, 1500);
     }
-  }
+}
 
   function showSection(sectionId) {
   document.querySelectorAll("section").forEach(section => {
