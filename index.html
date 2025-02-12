@@ -378,11 +378,22 @@ section.active {
 
   <script>
     function showSection(sectionId) {
-      document.querySelectorAll("section").forEach(section => {
+    // Hide all sections
+    document.querySelectorAll("section").forEach(section => {
         section.classList.remove("active");
-      });
-      document.getElementById(sectionId).classList.add("active");
+    });
+
+    // If we're showing "maison," ensure it remains visible
+    if (sectionId === "maison") {
+        document.getElementById("maison").classList.remove("hidden"); 
+        document.getElementById("maison").classList.add("active"); 
+    } else {
+        document.getElementById("maison").classList.add("hidden"); // Hide Maison when switching sections
     }
+
+    // Show the requested section
+    document.getElementById(sectionId).classList.add("active");
+}
 
     function showConcept(conceptId) {
       const concepts = {
@@ -509,11 +520,17 @@ function showSection(sectionId) {
 
 // Re-add event listeners every time the DOM loads
 document.addEventListener("DOMContentLoaded", function () {
+    if (localStorage.getItem("authenticated") === "true") {
+        document.getElementById("password-overlay").style.display = "none";
+        document.getElementById("maison").classList.add("active");
+    }
+
+    // Ensure navigation always works, even after clicking Contact
     document.querySelectorAll("nav a").forEach(link => {
         link.addEventListener("click", function (event) {
-            event.preventDefault(); // Stop default link behavior
-            const targetSection = this.getAttribute("data-section");
-            showSection(targetSection);
+            event.preventDefault();
+            const sectionId = this.getAttribute("onclick").match(/'([^']+)'/)[1];
+            showSection(sectionId);
         });
     });
 });
