@@ -220,7 +220,7 @@
   width: 100%;
   height: auto;
   opacity: 0;
-  transition: opacity 0.5s ease-in-out; /* Fade in ONLY when unlocked */
+  transition: opacity 0.5s ease-in-out;
   pointer-events: auto;
 }
 
@@ -243,11 +243,11 @@
     </div>
   </div>
   <nav>
-    <a href="#" onclick="showSection('maison')">Maison</a>
-    <a href="#" onclick="showSection('concepts')">Concepts</a>
-    <a href="#" onclick="showSection('manifeste')">Manifeste</a>
-    <a href="#" onclick="showSection('contact')">Contact</a>
-  </nav>
+  <a href="#" onclick="showSection('maison')">Maison</a>
+  <a href="#" onclick="showSection('concepts')">Concepts</a>
+  <a href="#" onclick="showSection('manifeste')">Manifeste</a>
+  <a href="#" onclick="showSection('contact')">Contact</a>
+</nav>
 
   <section id="maison" class="active">
     <img src="logo.png" alt="Logo" class="logo">
@@ -383,7 +383,7 @@ Les Champs Magnétiques rejects convention. It is not an aesthetic. It is a reac
     if (userInput === correctPassword) {
       localStorage.setItem("authenticated", "true");
       document.getElementById("password-overlay").style.display = "none";
-      document.getElementById("maison").classList.add("active"); // Fades in on unlock
+      document.getElementById("maison").classList.add("active");
     } else {
       document.getElementById("error-overlay").style.display = "flex";
       setTimeout(() => {
@@ -397,8 +397,11 @@ Les Champs Magnétiques rejects convention. It is not an aesthetic. It is a reac
       section.classList.remove("active");
     });
 
-    if (sectionId !== "maison") {
-      document.getElementById("maison").classList.add("hidden"); // Instantly hide logo/brand name
+    if (sectionId === "maison") {
+      document.getElementById("maison").classList.remove("hidden"); // Make Maison reappear
+      document.getElementById("maison").classList.add("active"); 
+    } else {
+      document.getElementById("maison").classList.add("hidden"); // Hide Maison when switching sections
     }
 
     document.getElementById(sectionId).classList.add("active");
