@@ -270,6 +270,86 @@ section.active {
 #maison.hidden {
   display: none; /* Instantly disappears when another section is clicked */
 }
+.concept-container {
+  text-align: left;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+#concept-title {
+  text-align: center;
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.concept-subtitle {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 400;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+.concept-image {
+  width: 100%;
+  max-width: 500px;
+  margin: 20px auto;
+  display: block;
+  border-radius: 5px;
+}
+
+.concept-edition,
+.concept-price {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 500;
+  margin: 10px 0;
+}
+
+.concept-description {
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.concept-future-editions {
+  font-size: 14px;
+  color: #777;
+  text-align: center;
+  font-style: italic;
+}
+
+.concept-purchase {
+  text-align: center;
+  font-size: 16px;
+  margin-top: 20px;
+}
+
+.contact-email {
+  color: #de1201;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.contact-email:hover {
+  text-decoration: underline;
+}
+.concept-images {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin: 20px 0;
+}
+
+.concept-images img {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 5px;
+  display: block;
+}
   </style>
 </head>
 <body>
@@ -313,15 +393,17 @@ section.active {
   <!-- Concept Pages -->
   <section id="concept-page" class="concept-container">
   <h2 id="concept-title"></h2>
+  <p id="concept-subtitle" class="concept-subtitle"></p> <!-- New subtitle -->
+ <div id="concept-images" class="concept-images"></div> <!-- Dynamic Image Container -->
+  <p id="concept-edition" class="concept-edition"></p>
+  <p id="concept-price" class="concept-price"></p>
   <p id="concept-description"></p>
-  <p id="concept-edition"></p>
+  <p id="concept-future-editions" class="concept-future-editions"></p>
 
-  <!-- ADD THESE TWO LINES BELOW -->
-  <p id="concept-price" style="font-weight: bold;"></p>
-  <p id="concept-future-editions" style="font-size: 14px; color: #555;"></p>
-
-  <p><strong>For purchase:</strong> Email your name, quantity, variation (if applicable), and size to  
-  <a href="mailto:shop@champsmag.com" class="contact-email">shop@champsmag.com</a></p>
+  <p class="concept-purchase">
+    <strong>For purchase:</strong> Email your name, quantity, variation (if applicable), and size to  
+    <a href="mailto:shop@champsmag.com" class="contact-email">shop@champsmag.com</a>
+  </p>
 </section>
 
   <section id="manifeste">
@@ -405,84 +487,174 @@ section.active {
 }
 
     function showConcept(conceptId) {
-      const concepts = {
-  "cadavre-exquis": {
-    "title": "001 Cadavre Exquis",
-    "description": "A reverse weave sweatshirt with fragmented lettering, cut from found T-shirts.",
-    "edition": "One of one.",
-    "price": "$2,600",
-    "future_editions": "A limited run of 260 recreations may be produced in the future, priced at $260 each. These will be reproductions of the original artist proof, rather than individually sourced and assembled pieces. However, future editions are not guaranteed."
-  },
-  "noeud-nu": {
-    "title": "002 Nœud Nu",
-    "description": "A wing-collared tuxedo shirt with a bowtie removed at the structural level.",
-    "edition": "One of one.",
-    "price": "$2,600",
-    "future_editions": "A limited run of 260 recreations may be produced in the future, priced at $260 each. These will be reproductions of the original artist proof, rather than individually sourced and assembled pieces. However, future editions are not guaranteed."
-  },
-  "glaciere": {
-    "title": "003 Glacière",
-    "description": "An Arctic Ice bag, made rigid and repurposed as a jewelry box.",
-    "edition": "One of one.",
-    "price": "$2,600",
-    "future_editions": "A limited run of 260 recreations may be produced in the future, priced at $260 each. These will be reproductions of the original artist proof, rather than individually sourced and assembled pieces. However, future editions are not guaranteed."
-  },
-  "fige": {
-    "title": "004 Figé",
-    "description": "High-gloss heels, fused to their own base plate.",
-    "edition": "One of one.",
-    "price": "$2,600",
-    "future_editions": "A limited run of 26 recreations may be produced in the future, priced at $260 each. These will be reproductions of the original artist proof, rather than individually sourced and assembled pieces. However, future editions are not guaranteed."
-  },
-  "ligne-de-flottaison": {
-    "title": "005 Ligne de Flottaison",
-    "description": "A T-shirt with a joke that reveals its punchline when soaked.",
-    "edition": "One of one.",
-    "price": "$2,600",
-    "future_editions": "A limited run of 260 recreations may be produced in the future, priced at $260 each. These will be reproductions of the original artist proof, rather than individually sourced and assembled pieces. However, future editions are not guaranteed."
-  },
-  "faux-pas": {
-    "title": "006 Faux Pas",
-    "description": "Sculpted bear claw gloves in gloss black.",
-    "edition": "One of one pair.",
-    "price": "$2,600",
-    "future_editions": "A limited run of 260 recreations may be produced in the future, priced at $260 each. These will be reproductions of the original artist proof, rather than individually sourced and assembled pieces. However, future editions are not guaranteed."
-  },
-  "quatre-yeux": {
-    "title": "007 Quatre Yeux",
-    "description": "A pair of sunglasses with four overlapping lenses.",
-    "edition": "One of one.",
-    "price": "$2,600",
-    "future_editions": "A limited run of 260 recreations may be produced in the future, priced at $260 each. These will be reproductions of the original artist proof, rather than individually sourced and assembled pieces. However, future editions are not guaranteed."
-  },
-  "assassine": {
-    "title": "008 Assassiné",
-    "description": "A white dress shirt with a single gunshot hole, embroidered in beaded blood.",
-    "edition": "One of one.",
-    "price": "$2,600",
-    "future_editions": "A limited run of 260 recreations may be produced in the future, priced at $260 each. These will be reproductions of the original artist proof, rather than individually sourced and assembled pieces. However, future editions are not guaranteed."
-  },
-  "cameleon": {
-    "title": "009 Caméléon",
-    "description": "A trench coat printed with the exact surface of [INSERT INTERSECTION].",
-    "edition": "One of one.",
-    "price": "$2,600",
-    "future_editions": "A limited run of 260 recreations may be produced in the future, priced at $260 each. These will be reproductions of the original artist proof, rather than individually sourced and assembled pieces. However, future editions are not guaranteed."
-  },
-  "lautre-moitie": {
-    "title": "010 L’Autre Moitié",
-    "description": "A divided photograph, printed onto two T-shirts. Must be sold separately.",
-    "edition": "One of two.",
-    "price": "$2,600 each.",
-    "future_editions": "A limited run of 260 recreations may be produced in the future, priced at $260 each. These will be reproductions of the original artist proof, rather than individually sourced and assembled pieces. However, future editions are not guaranteed."
-  },
-    "bonbonniere": {
-    "title": "011 Bonbonnière",
-    "description": "A metal cigarette, drilled to hold a lollipop stick.",
-    "edition": "One of one.",
-    "price": "$2,600",
-    "future_editions": "A limited run of 260 recreations may be produced in the future, priced at $260 each."
-  }
+    const concepts = {
+        "cadavre-exquis": {
+            "title": "001 Cadavre Exquis",
+            "subtitle": "Fragmented lettering meets reverse weave.",
+            "description": "A reverse weave sweatshirt with fragmented lettering, cut from found T-shirts.",
+            "edition": "One of one.",
+            "price": "$2,600",
+            "future_editions": "A limited run of 260 recreations may be produced in the future, priced at $260 each.",
+            "images": [
+                "images/cadavre-exquis-1.jpg",
+                "images/cadavre-exquis-2.jpg",
+                "images/cadavre-exquis-3.jpg"
+            ]
+        },
+        "noeud-nu": {
+            "title": "002 Nœud Nu",
+            "subtitle": "The absence of a bowtie as structure.",
+            "description": "A wing-collared tuxedo shirt with a bowtie removed at the structural level.",
+            "edition": "One of one.",
+            "price": "$2,600",
+            "future_editions": "A limited run of 260 recreations may be produced in the future, priced at $260 each.",
+            "images": [
+                "images/noeud-nu-1.jpg",
+                "images/noeud-nu-2.jpg",
+                "images/noeud-nu-3.jpg",
+                "images/noeud-nu-4.jpg",
+                "images/noeud-nu-5.jpg"
+            ]
+        },
+        "glaciere": {
+            "title": "003 Glacière",
+            "subtitle": "An Arctic Ice bag transformed into a jewelry box.",
+            "description": "An Arctic Ice bag, made rigid and repurposed as a jewelry box.",
+            "edition": "One of one.",
+            "price": "$2,600",
+            "future_editions": "A limited run of 260 recreations may be produced in the future, priced at $260 each.",
+            "images": [
+                "images/glaciere-1.jpg",
+                "images/glaciere-2.jpg"
+            ]
+        },
+        "fige": {
+            "title": "004 Figé",
+            "subtitle": "High-gloss heels, fused to their own base plate.",
+            "description": "A pair of high-gloss heels, sculpted and permanently fused to a base plate.",
+            "edition": "One of one.",
+            "price": "$2,600",
+            "future_editions": "A limited run of 26 recreations may be produced in the future, priced at $260 each.",
+            "images": [
+                "images/fige-1.jpg",
+                "images/fige-2.jpg",
+                "images/fige-3.jpg"
+            ]
+        },
+        "ligne-de-flottaison": {
+            "title": "005 Ligne de Flottaison",
+            "subtitle": "A joke that only appears when soaked.",
+            "description": "A T-shirt featuring a joke whose punchline reveals itself when wet.",
+            "edition": "One of one.",
+            "price": "$2,600",
+            "future_editions": "A limited run of 260 recreations may be produced in the future, priced at $260 each.",
+            "images": [
+                "images/ligne-de-flottaison-1.jpg",
+                "images/ligne-de-flottaison-2.jpg"
+            ]
+        },
+        "faux-pas": {
+            "title": "006 Faux Pas",
+            "subtitle": "Sculpted bear claw gloves in gloss black.",
+            "description": "A set of sculpted bear claw gloves, cast in glossy black resin.",
+            "edition": "One of one pair.",
+            "price": "$2,600",
+            "future_editions": "A limited run of 260 recreations may be produced in the future, priced at $260 each.",
+            "images": [
+                "images/faux-pas-1.jpg",
+                "images/faux-pas-2.jpg",
+                "images/faux-pas-3.jpg"
+            ]
+        },
+        "quatre-yeux": {
+            "title": "007 Quatre Yeux",
+            "subtitle": "A pair of sunglasses with four overlapping lenses.",
+            "description": "A pair of handcrafted sunglasses featuring four overlapping lenses, offering a surreal visual experience.",
+            "edition": "One of one.",
+            "price": "$2,600",
+            "future_editions": "A limited run of 260 recreations may be produced in the future, priced at $260 each.",
+            "images": [
+                "images/quatre-yeux-1.jpg",
+                "images/quatre-yeux-2.jpg"
+            ]
+        },
+        "assassine": {
+            "title": "008 Assassiné",
+            "subtitle": "A white dress shirt with a single gunshot hole, embroidered in beaded blood.",
+            "description": "A pristine white dress shirt featuring a single embroidered gunshot hole with detailed beaded blood.",
+            "edition": "One of one.",
+            "price": "$2,600",
+            "future_editions": "A limited run of 260 recreations may be produced in the future, priced at $260 each.",
+            "images": [
+                "images/assassine-1.jpg",
+                "images/assassine-2.jpg",
+                "images/assassine-3.jpg",
+                "images/assassine-4.jpg"
+            ]
+        },
+        "cameleon": {
+            "title": "009 Caméléon",
+            "subtitle": "A trench coat printed with the exact surface of its surroundings.",
+            "description": "A trench coat printed with the exact photographic texture of a specific intersection, blending seamlessly into its environment.",
+            "edition": "One of one.",
+            "price": "$2,600",
+            "future_editions": "A limited run of 260 recreations may be produced in the future, priced at $260 each.",
+            "images": [
+                "images/cameleon-1.jpg",
+                "images/cameleon-2.jpg",
+                "images/cameleon-3.jpg"
+            ]
+        },
+        "lautre-moitie": {
+            "title": "010 L’Autre Moitié",
+            "subtitle": "A divided photograph, printed onto two T-shirts. Must be sold separately.",
+            "description": "A large-format photograph, split across two separate T-shirts, requiring both halves to complete the image.",
+            "edition": "One of two.",
+            "price": "$2,600 each.",
+            "future_editions": "A limited run of 260 recreations may be produced in the future, priced at $260 each.",
+            "images": [
+                "images/lautre-moitie-1.jpg",
+                "images/lautre-moitie-2.jpg",
+                "images/lautre-moitie-3.jpg"
+            ]
+        },
+        "bonbonniere": {
+            "title": "011 Bonbonnière",
+            "subtitle": "A metal cigarette, drilled to hold a lollipop stick.",
+            "description": "A reimagined cigarette, cast in metal and modified to hold a lollipop stick, transforming the act of smoking into something playful and subversive.",
+            "edition": "One of one.",
+            "price": "$2,600",
+            "future_editions": "A limited run of 260 recreations may be produced in the future, priced at $260 each.",
+            "images": [
+                "images/bonbonniere-1.jpg",
+                "images/bonbonniere-2.jpg",
+                "images/bonbonniere-3.jpg"
+            ]
+        }
+    };
+
+    if (concepts[conceptId]) {
+        document.getElementById("concept-title").innerText = concepts[conceptId].title;
+        document.getElementById("concept-subtitle").innerText = concepts[conceptId].subtitle;
+        document.getElementById("concept-description").innerText = concepts[conceptId].description;
+        document.getElementById("concept-edition").innerText = concepts[conceptId].edition;
+        document.getElementById("concept-price").innerText = concepts[conceptId].price;
+        document.getElementById("concept-future-editions").innerText = concepts[conceptId].future_editions;
+
+        let conceptImagesContainer = document.getElementById("concept-images");
+        conceptImagesContainer.innerHTML = "";
+
+        if (concepts[conceptId].images) {
+            concepts[conceptId].images.forEach(imageSrc => {
+                let imgElement = document.createElement("img");
+                imgElement.src = imageSrc;
+                imgElement.classList.add("concept-image");
+                conceptImagesContainer.appendChild(imgElement);
+            });
+        }
+
+        showSection("concept-page");
+    }
 };
 
       if (concepts[conceptId]) {
