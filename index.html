@@ -257,6 +257,11 @@
 .concepts-button:hover {
   background-color: rgba(0, 0, 0, 0.2); /* Darken slightly on hover */
 }
+.concept-description {
+  text-align: center;
+  max-width: 80%; /* Prevents it from stretching too wide */
+  margin: 0 auto; /* Ensures it's centered within its container */
+}
   </style>
 </head>
 <body>
@@ -431,7 +436,7 @@
       const conceptHTML = `
         <h2>${concept.title}</h2>
         ${images.length > 0 ? initCarousel(images) : ''}
-        <p>${concept.description}</p>
+        <p class="concept-description">${concept.description}</p>
         <br>
         <p><em>${concept.edition} — ${concept.price}</em></p>
          <p class="purchase-line"><em>Contact <a href="mailto:shop@champsmag.com" class="contact-email">shop@champsmag.com</a> to purchase.</em></p>
