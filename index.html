@@ -236,6 +236,27 @@
       font-weight: 700;
       text-transform: uppercase;
     }
+    .future-editions {
+  font-size: 12px; /* Much smaller font */
+  color: rgba(0, 0, 0, 0.6); /* Lighter font color */
+  margin-top: 15px; /* Push it lower */
+  text-align: center; /* Keep it centered */
+  max-width: 80%; /* Keep it visually balanced */
+}
+.concepts-button {
+  background-color: rgba(0, 0, 0, 0.1); /* Subtle muted tone */
+  color: black; /* Keep text black */
+  border: none; /* No borders for a sleek look */
+  padding: 10px 20px; /* Slightly more spacing */
+  border-radius: 20px; /* Soft edges for luxury feel */
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.concepts-button:hover {
+  background-color: rgba(0, 0, 0, 0.2); /* Darken slightly on hover */
+}
   </style>
 </head>
 <body>
@@ -411,11 +432,10 @@
         <h2>${concept.title}</h2>
         ${images.length > 0 ? initCarousel(images) : ''}
         <p>${concept.description}</p>
-        <p>${concept.edition}</p>
-        <p><strong>${concept.price}</strong></p>
-        <p>${concept.future_editions}</p>
-        <p><strong>For purchase:</strong> Email <a href="mailto:shop@champsmag.com" class="contact-email">shop@champsmag.com</a></p>
-        <button onclick="showSection('concepts')">Back to Concepts</button>
+        <p><em>${concept.edition} — ${concept.price}</em></p>
+        <p class="future-editions">${concept.future_editions}</p>
+        <p class="purchase-line">Contact <a href="mailto:shop@champsmag.com" class="contact-email">shop@champsmag.com</a> to purchase.</p>
+        <button class="concepts-button" onclick="showSection('concepts')">Back to Concepts</button>
       `;
 
       document.getElementById('concept-page').innerHTML = conceptHTML;
