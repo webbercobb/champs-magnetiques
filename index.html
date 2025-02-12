@@ -311,12 +311,17 @@ section.active {
 
   <!-- Concept Pages -->
   <section id="concept-page" class="concept-container">
-    <h2 id="concept-title"></h2>
-    <p id="concept-description"></p>
-    <p id="concept-edition"></p>
-    <p><strong>For purchase:</strong> Email your name, quantity, variation (if applicable), and size to  
-    <a href="mailto:shop@champsmag.com" class="contact-email">shop@champsmag.com</a></p>
-  </section>
+  <h2 id="concept-title"></h2>
+  <p id="concept-description"></p>
+  <p id="concept-edition"></p>
+
+  <!-- ADD THESE TWO LINES BELOW -->
+  <p id="concept-price" style="font-weight: bold;"></p>
+  <p id="concept-future-editions" style="font-size: 14px; color: #555;"></p>
+
+  <p><strong>For purchase:</strong> Email your name, quantity, variation (if applicable), and size to  
+  <a href="mailto:shop@champsmag.com" class="contact-email">shop@champsmag.com</a></p>
+</section>
 
   <section id="manifeste">
     
@@ -473,11 +478,16 @@ section.active {
 };
 
       if (concepts[conceptId]) {
-        document.getElementById("concept-title").innerText = concepts[conceptId].title;
-        document.getElementById("concept-description").innerText = concepts[conceptId].description;
-        document.getElementById("concept-edition").innerText = concepts[conceptId].edition;
-        showSection("concept-page");
-      }
+    document.getElementById("concept-title").innerText = concepts[conceptId].title;
+    document.getElementById("concept-description").innerText = concepts[conceptId].description;
+    document.getElementById("concept-edition").innerText = concepts[conceptId].edition;
+
+    // ADD THESE TWO LINES
+    document.getElementById("concept-price").innerText = concepts[conceptId].price; 
+    document.getElementById("concept-future-editions").innerText = concepts[conceptId].future_editions;
+
+    showSection("concept-page");
+}
     }
   </script>
   <script>
