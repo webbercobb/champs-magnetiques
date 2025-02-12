@@ -28,12 +28,13 @@
   }
 
   #contact {
-    display: none;  /* Start hidden */
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    transform: translateY(-30px);
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  /* Remove the transform line */
+}
 }
 
 /* 🛠️ ADD THIS TO FIX NAVIGATION ISSUES */
@@ -146,11 +147,12 @@ section.active {
     }
 
     nav {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      font-size: 14px;
-    }
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  font-size: 14px;
+  z-index: 1000; /* Add this line */
+}
 
     nav a {
       margin-left: 15px;
