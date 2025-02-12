@@ -267,6 +267,41 @@
   max-width: 90%; /* Prevents it from stretching too wide */
   margin: 0 auto; /* Ensures it's centered within its container */
 }
+.approval-text {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.6);
+  margin: 15px 0;
+  text-align: center;
+  max-width: 80%;
+  line-height: 1.4;
+}
+
+.form-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.form-container label {
+  display: block;
+  margin: 10px 0 5px;
+  font-size: 14px;
+}
+
+.form-container input,
+.form-container textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid rgba(0,0,0,0.2);
+  background: rgba(255,255,255,0.1);
+}
+
+.form-footer {
+  font-size: 12px;
+  margin: 20px 0;
+  color: rgba(0,0,0,0.6);
+}
   </style>
 </head>
 <body>
@@ -323,6 +358,39 @@
   <section id="contact">
     <p>For inquiries, please email <a href="mailto:contact@champsmag.com" class="contact-email">contact@champsmag.com</a></p>
   </section>
+  
+  <section id="purchase-form" style="display: none;">
+  <div class="form-container">
+    <form id="purchaseRequestForm" onsubmit="handleFormSubmit(event)">
+      <input type="hidden" id="concept-name" name="concept-name">
+      
+      <label for="full-name">Full Name:</label>
+      <input type="text" id="full-name" name="full-name" required>
+      
+      <label for="email">Email Address:</label>
+      <input type="email" id="email" name="email" required>
+      
+      <label for="location">City & Country:</label>
+      <input type="text" id="location" name="location" required>
+      
+      <label for="affiliations">Affiliations & Associations:</label>
+      <textarea id="affiliations" name="affiliations" required></textarea>
+      
+      <label for="why-piece">Why This Piece?</label>
+      <textarea id="why-piece" name="why-piece" required></textarea>
+      
+      <label for="relationship">What is your relationship to fashion & art?</label>
+      <textarea id="relationship" name="relationship" required></textarea>
+      
+      <label for="additional-info">Optional: Anything else we should know?</label>
+      <textarea id="additional-info" name="additional-info"></textarea>
+      
+      <p class="form-footer">Pieces from Les Champs Magnétiques are placed with collectors who align with the house’s values. If your request is accepted, you will receive further instructions for acquisition.</p>
+      
+      <button type="submit">Submit Request</button>
+    </form>
+  </div>
+</section>
 
   <div id="error-overlay">
     <p id="error-message">Non-lieu</p>
@@ -444,10 +512,11 @@
         <p class="concept-description">${concept.description}</p>
         <br>
         <p><em>${concept.edition} — ${concept.price}</em></p>
-         <p class="purchase-line"><em>Contact <a href="mailto:shop@champsmag.com" class="contact-email">shop@champsmag.com</a> to purchase.</em></p>
+         <div class="approval-text">Purchase requests are subject to approval.<br>This house does not serve those who uphold systems of greed, repression, or cultural decay.</div>
+<button class="concepts-button" onclick="showPurchaseForm('${conceptId}')">Request to Purchase</button>
         <p class="future-editions">${concept.future_editions}</p>
        
-        <button class="concepts-button" onclick="showSection('concepts')">Back to Concepts</button>
+        
       `;
 
       document.getElementById('concept-page').innerHTML = conceptHTML;
@@ -513,6 +582,33 @@ if (userInput === correctPassword) {
             document.getElementById("password-input").value = "";
         }, 1500);
     }
+    function showPurchaseForm(conceptId) {
+  document.getElementById('concept-name').value = concepts[conceptId].title;
+  showSection('purchase-form');
+}
+
+function handleFormSubmit(event) {
+  event.preventDefault();
+  const formData = new FormData(event.target);
+  const data = Object.fromEntries(formData.entries());
+  
+  const emailBody = `New Purchase Request:
+  
+Concept: ${data['concept-name']}
+Name: ${data['full-name']}
+Email: ${data.email}
+Location: ${data.location}
+Affiliations: ${data.affiliations}
+Why This Piece: ${data['why-piece']}
+Relationship to Fashion/Art: ${data.relationship}
+Additional Info: ${data['additional-info'] || 'N/A'}`;
+
+  window.location.href = `mailto:shop@champsmag.com?subject=Purchase Request - ${data['concept-name']}&body=${encodeURIComponent(emailBody)}`;
+  
+  // Show confirmation
+  alert('Your request has been submitted. We will review it and respond shortly.');
+  showSection('concept-page');
+}
 }
 
 
@@ -536,6 +632,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 });
+
 </script>
 
 </body>
