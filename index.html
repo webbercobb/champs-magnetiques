@@ -302,6 +302,19 @@
   margin: 20px 0;
   color: rgba(0,0,0,0.6);
 }
+#purchase-form {
+  display: none;
+  padding: 40px 20px;
+}
+
+#purchase-form.active {
+  display: flex;
+}
+
+.form-container {
+  width: 100%;
+  max-width: 600px;
+}
   </style>
 </head>
 <body>
@@ -359,7 +372,7 @@
     <p>For inquiries, please email <a href="mailto:contact@champsmag.com" class="contact-email">contact@champsmag.com</a></p>
   </section>
   
-  <section id="purchase-form" style="display: none;">
+  <section id="purchase-form">
   <div class="form-container">
     <form id="purchaseRequestForm" onsubmit="handleFormSubmit(event)">
       <input type="hidden" id="concept-name" name="concept-name">
@@ -529,18 +542,18 @@
     function showSection(sectionId) {
   // Hide error overlay when navigating
   document.getElementById("error-overlay").style.display = "none";
-        document.querySelectorAll("section").forEach(section => {
-            section.classList.remove("active");
-            section.style.display = "none";
-        });
+  
+  // Hide all sections
+  document.querySelectorAll("section").forEach(section => {
+    section.style.display = "none";
+  });
 
-        // Show requested section
-        const targetSection = document.getElementById(sectionId);
-        if (targetSection) {
-            targetSection.classList.add("active");
-            targetSection.style.display = "flex";
-        }
-    }
+  // Show requested section
+  const targetSection = document.getElementById(sectionId);
+  if (targetSection) {
+    targetSection.style.display = "flex"; // Changed to flex to match others
+  }
+}
 </script>
   <script>
 // Consolidated showSection function
@@ -564,6 +577,14 @@ function showSection(sectionId) {
 function checkPassword() {
     const correctPassword = "cecin'estpasunmotdepasse";
     const userInput = document.getElementById("password-input").value;
+
+function showPurchaseForm(conceptId) {
+  document.getElementById('concept-name').value = concepts[conceptId].title;
+  document.getElementById('purchase-form').style.display = 'flex';
+  document.querySelectorAll("section").forEach(section => {
+    if (section.id !== 'purchase-form') section.style.display = "none";
+  });
+}
 
     // In checkPassword() function after successful auth
 if (userInput === correctPassword) {
