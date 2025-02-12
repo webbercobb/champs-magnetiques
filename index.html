@@ -488,25 +488,27 @@ function checkPassword() {
 }
 
 function showSection(sectionId) {
-    // Hide all sections
+    // Ensure all sections are fully hidden
     document.querySelectorAll("section").forEach(section => {
         section.classList.remove("active");
         section.style.display = "none"; 
     });
 
-    // Make sure the selected section is visible
+    // Make sure the selected section is properly visible
     const activeSection = document.getElementById(sectionId);
     if (activeSection) {
         activeSection.classList.add("active");
         activeSection.style.display = "flex"; 
     }
+
+    console.log(`Navigating to: ${sectionId}`); // Debugging log
 }
 
-// Add event listeners for ALL nav links ONCE (ensures they always work)
+// Re-add event listeners every time the DOM loads
 document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll("nav a").forEach(link => {
         link.addEventListener("click", function (event) {
-            event.preventDefault(); // Prevent default link behavior
+            event.preventDefault(); // Stop default page jumps
             const targetSection = this.getAttribute("data-section");
             showSection(targetSection);
         });
