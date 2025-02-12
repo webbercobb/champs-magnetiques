@@ -633,28 +633,29 @@ section.active {
     };
 
     if (concepts[conceptId]) {
-        document.getElementById("concept-title").innerText = concepts[conceptId].title;
-        document.getElementById("concept-subtitle").innerText = concepts[conceptId].subtitle;
-        document.getElementById("concept-description").innerText = concepts[conceptId].description;
-        document.getElementById("concept-edition").innerText = concepts[conceptId].edition;
-        document.getElementById("concept-price").innerText = concepts[conceptId].price;
-        document.getElementById("concept-future-editions").innerText = concepts[conceptId].future_editions;
+    document.getElementById("concept-title").innerText = concepts[conceptId].title;
+    document.getElementById("concept-subtitle").innerText = concepts[conceptId].subtitle;
+    document.getElementById("concept-description").innerText = concepts[conceptId].description;
+    document.getElementById("concept-edition").innerText = concepts[conceptId].edition;
+    document.getElementById("concept-price").innerText = concepts[conceptId].price;
+    document.getElementById("concept-future-editions").innerText = concepts[conceptId].future_editions;
 
-        let conceptImagesContainer = document.getElementById("concept-images");
-        conceptImagesContainer.innerHTML = ""; // Clear previous images
+    let conceptImagesContainer = document.getElementById("concept-images");
+    conceptImagesContainer.innerHTML = ""; // Clear previous images
 
-        if (concepts[conceptId].images && concepts[conceptId].images.length > 0) {
-            concepts[conceptId].images.forEach(imageSrc => {
-                let imgElement = document.createElement("img");
-                imgElement.src = imageSrc;
-                imgElement.alt = concepts[conceptId].title;
-                imgElement.classList.add("concept-image");
-                conceptImagesContainer.appendChild(imgElement);
-            });
-        }
-
-        showSection("concept-page");
+    // ✅ Safeguard against missing images
+    if (concepts[conceptId].images && concepts[conceptId].images.length > 0) {
+        concepts[conceptId].images.forEach(imageSrc => {
+            let imgElement = document.createElement("img");
+            imgElement.src = imageSrc;
+            imgElement.alt = concepts[conceptId].title;
+            imgElement.classList.add("concept-image");
+            imgElement.onerror = function() { this.style.display = 'none'; }; // Hides broken images
+            conceptImagesContainer.appendChild(imgElement);
+        });
     }
+
+    showSection("concept-page");
 };
 
     if (concepts[conceptId]) {
