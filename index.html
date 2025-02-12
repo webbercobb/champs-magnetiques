@@ -456,7 +456,8 @@
 <!-- Fix the showSection function in the second script tag -->
 <script>
     function showSection(sectionId) {
-        // Hide all sections
+  // Hide error overlay when navigating
+  document.getElementById("error-overlay").style.display = "none";
         document.querySelectorAll("section").forEach(section => {
             section.classList.remove("active");
             section.style.display = "none";
