@@ -43,7 +43,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      z-index: 9999;
+      z-index: 10000;
     }
 
     .password-container {
@@ -576,10 +576,10 @@
 
     // Password check function
     function checkPassword() {
-        const correctPassword = "cecin'estpasunmotdepasse";
-        const userInput = document.getElementById("password-input").value;
+    const correctPassword = "cecin'estpasunmotdepasse";
+    const userInput = document.getElementById("password-input").value;
 
-        if (userInput === correctPassword) {
+    if (userInput === correctPassword) {
             // Successful login
             document.querySelector('meta[name="viewport"]').content = 
                 "width=device-width, initial-scale=1.0, maximum-scale=1.0";
@@ -587,13 +587,18 @@
             document.getElementById("password-overlay").style.display = "none";
             showSection("maison");
         } else {
-            // Failed login
-            document.getElementById("error-overlay").style.display = "flex";
-            setTimeout(() => {
-                document.getElementById("error-overlay").style.display = "none";
-                document.getElementById("password-input").value = "";
-            }, 1500);
-        }
+        // Immediately hide password overlay
+        document.getElementById("password-overlay").style.display = "none";
+        // Show error overlay
+        document.getElementById("error-overlay").style.display = "flex";
+        setTimeout(() => {
+            document.getElementById("error-overlay").style.display = "none";
+            document.getElementById("password-input").value = "";
+            // Re-show password prompt after error
+            document.getElementById("password-overlay").style.display = "flex";
+        }, 1500);
+    }
+}
     }
 
     // Purchase form functions
