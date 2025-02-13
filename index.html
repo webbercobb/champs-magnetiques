@@ -557,66 +557,58 @@
 }
 </script>
   <script>
-// Consolidated showSection function
-function showSection(sectionId) {
-    // Hide error overlay
-    document.getElementById("error-overlay").style.display = "none";
-    // Hide all sections
-    document.querySelectorAll("section").forEach(section => {
-        section.classList.remove("active");
-        section.style.display = "none";
-    });
-    // Show target section
-    const targetSection = document.getElementById(sectionId);
-    if (targetSection) {
-        targetSection.classList.add("active");
-        targetSection.style.display = "flex";
+    // Consolidated showSection function (SINGLE VERSION)
+    function showSection(sectionId) {
+        // Hide error overlay
+        document.getElementById("error-overlay").style.display = "none";
+        // Hide all sections
+        document.querySelectorAll("section").forEach(section => {
+            section.classList.remove("active");
+            section.style.display = "none";
+        });
+        // Show target section
+        const targetSection = document.getElementById(sectionId);
+        if (targetSection) {
+            targetSection.classList.add("active");
+            targetSection.style.display = "flex";
+        }
     }
-}
 
-// Password check function
-function checkPassword() {
-    const correctPassword = "cecin'estpasunmotdepasse";
-    const userInput = document.getElementById("password-input").value;
+    // Password check function
+    function checkPassword() {
+        const correctPassword = "cecin'estpasunmotdepasse";
+        const userInput = document.getElementById("password-input").value;
 
-function showPurchaseForm(conceptId) {
-  document.getElementById('concept-name').value = concepts[conceptId].title;
-  document.getElementById('purchase-form').style.display = 'flex';
-  document.querySelectorAll("section").forEach(section => {
-    if (section.id !== 'purchase-form') section.style.display = "none";
-  });
-}
-
-    // In checkPassword() function after successful auth
-if (userInput === correctPassword) {
-  // Add viewport reset
-  document.querySelector('meta[name="viewport"]').content = 
-    "width=device-width, initial-scale=1.0, maximum-scale=1.0";
-  // Rest of existing code...
-
-        localStorage.setItem("authenticated", "true");
-        document.getElementById("password-overlay").style.display = "none";
-        showSection("maison"); // Show Maison section after login
-    } else {
-        document.getElementById("error-overlay").style.display = "flex";
-        setTimeout(() => {
-            document.getElementById("error-overlay").style.display = "none";
-            document.getElementById("password-input").value = "";
-        }, 1500);
+        if (userInput === correctPassword) {
+            // Successful login
+            document.querySelector('meta[name="viewport"]').content = 
+                "width=device-width, initial-scale=1.0, maximum-scale=1.0";
+            localStorage.setItem("authenticated", "true");
+            document.getElementById("password-overlay").style.display = "none";
+            showSection("maison");
+        } else {
+            // Failed login
+            document.getElementById("error-overlay").style.display = "flex";
+            setTimeout(() => {
+                document.getElementById("error-overlay").style.display = "none";
+                document.getElementById("password-input").value = "";
+            }, 1500);
+        }
     }
-  }
+
+    // Purchase form functions
     function showPurchaseForm(conceptId) {
-  document.getElementById('concept-name').value = concepts[conceptId].title;
-  showSection('purchase-form');
-}
+        document.getElementById('concept-name').value = concepts[conceptId].title;
+        showSection('purchase-form');
+    }
 
-function handleFormSubmit(event) {
-  event.preventDefault();
-  const formData = new FormData(event.target);
-  const data = Object.fromEntries(formData.entries());
-  
-  const emailBody = `New Purchase Request:
-  
+    function handleFormSubmit(event) {
+        event.preventDefault();
+        const formData = new FormData(event.target);
+        const data = Object.fromEntries(formData.entries());
+        
+        const emailBody = `New Purchase Request:
+        
 Concept: ${data['concept-name']}
 Name: ${data['full-name']}
 Email: ${data.email}
@@ -626,36 +618,30 @@ Why This Piece: ${data['why-piece']}
 Relationship to Fashion/Art: ${data.relationship}
 Additional Info: ${data['additional-info'] || 'N/A'}`;
 
-  window.location.href = `mailto:shop@champsmag.com?subject=Purchase Request - ${data['concept-name']}&body=${encodeURIComponent(emailBody)}`;
-  
-  // Show confirmation
-  alert('Your request has been submitted. We will review it and respond shortly.');
-  showSection('concept-page');
-}
-}
-
-
-
-// On page load
-document.addEventListener("DOMContentLoaded", function() {
-    // Check authentication
-    if (localStorage.getItem("authenticated") === "true") {
-        document.getElementById("password-overlay").style.display = "none";
-        showSection("maison");
-    } else {
-        document.getElementById("password-overlay").style.display = "flex";
+        window.location.href = `mailto:shop@champsmag.com?subject=Purchase Request - ${data['concept-name']}&body=${encodeURIComponent(emailBody)}`;
+        alert('Your request has been submitted. We will review it and respond shortly.');
+        showSection('concept-page');
     }
 
-    // Setup navigation click handlers
-    document.querySelectorAll("nav a").forEach(link => {
-        link.addEventListener("click", (e) => {
-            e.preventDefault();
-            const section = link.getAttribute("onclick").replace("showSection('", "").replace("')", "");
-            showSection(section);
+    // On page load
+    document.addEventListener("DOMContentLoaded", function() {
+        // Check authentication
+        if (localStorage.getItem("authenticated") === "true") {
+            document.getElementById("password-overlay").style.display = "none";
+            showSection("maison");
+        } else {
+            document.getElementById("password-overlay").style.display = "flex";
+        }
+
+        // Setup navigation click handlers
+        document.querySelectorAll("nav a").forEach(link => {
+            link.addEventListener("click", (e) => {
+                e.preventDefault();
+                const section = link.getAttribute("onclick").replace("showSection('", "").replace("')", "");
+                showSection(section);
+            });
         });
     });
-});
-
 </script>
 
 </body>
