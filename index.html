@@ -576,29 +576,26 @@ body.error-active {
     const correctPassword = "cecin'estpasunmotdepasse";
     const userInput = document.getElementById("password-input").value;
 
-    if (userInput === correctPassword) {
-        // Successful login
-        localStorage.setItem("authenticated", "true");
-
-        // Hide password overlay and show correct section
-        document.getElementById("password-overlay").style.display = "none";
-        document.querySelector("nav").style.display = "block"; // Ensure nav is visible
-
-        // FULL RESET: Remove red background, error message, and reset site visuals
-        document.body.classList.remove("error-active");
-        document.body.style.backgroundColor = "#D8D0B8"; // Reset background color
-
-        // REMOVE the error overlay from the DOM completely
-        setTimeout(() => {
+    // Successful login
+if (userInput === correctPassword) {
+    localStorage.setItem("authenticated", "true");
+    
+    // Immediately reset error states
+    document.body.classList.remove("error-active");
+    document.body.style.backgroundColor = "#D8D0B8";
     const errorOverlay = document.getElementById("error-overlay");
     if (errorOverlay) {
-        errorOverlay.style.display = "none"; // Just hide it
-        errorOverlay.innerHTML = ""; // Clears its content (removes 'Non-lieu')
+        errorOverlay.style.display = "none";
+        errorOverlay.innerHTML = '<p id="error-message">Non-lieu</p>'; // Restore message if cleared
     }
-}, 1500);
 
-        showSection("maison");
-    } else {
+    // Hide password overlay and show content
+    document.getElementById("password-overlay").style.display = "none";
+    document.querySelector("nav").style.display = "block";
+    showSection("maison");
+    
+    // REMOVE the setTimeout block entirely from here
+} else {
         // Hide all sections including password overlay
         document.querySelectorAll("section").forEach(s => s.style.display = "none");
         document.getElementById("password-overlay").style.display = "none";
@@ -609,21 +606,23 @@ body.error-active {
         document.body.classList.add("error-active"); // Forces background color change
 
         // AUTOMATIC RESET AFTER 1.5 SECONDS
-        setTimeout(() => {
-            // REMOVE error message from the DOM completely
-            const errorOverlay = document.getElementById("error-overlay");
-            if (errorOverlay) {
-                errorOverlay.remove(); // This fully deletes "Non-lieu" so it can't linger
-            }
-
-            document.getElementById("password-input").value = "";
-            document.getElementById("password-overlay").style.display = "flex";
-            document.querySelector("nav").style.display = "block"; // Restore nav
-
-            // GUARANTEED full reset of background
-            document.body.classList.remove("error-active"); 
-            document.body.style.backgroundColor = "#D8D0B8"; // Ensure background returns to default
-        }, 1500);
+        // Wrong password
+setTimeout(() => {
+    // Instead of removing, just hide and reset
+    const errorOverlay = document.getElementById("error-overlay");
+    if (errorOverlay) {
+        errorOverlay.style.display = "none";
+    }
+    
+    // Restore password input
+    document.getElementById("password-input").value = "";
+    document.getElementById("password-overlay").style.display = "flex";
+    document.querySelector("nav").style.display = "block";
+    
+    // Reset body styles
+    document.body.classList.remove("error-active"); 
+    document.body.style.backgroundColor = "#D8D0B8";
+}, 1500);
     }
 }
 
