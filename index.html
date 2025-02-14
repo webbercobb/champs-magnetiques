@@ -714,7 +714,8 @@ if (userInput === correctPassword) {
     document.getElementById("password-overlay").style.display = "none";
     document.querySelector("nav").style.display = "block";
     showSection("maison");
-    
+        // Restart marquee animation after unlocking the site
+    restartMarquee();
     // REMOVE the setTimeout block entirely from here
 } else {
         // Hide all sections including password overlay
