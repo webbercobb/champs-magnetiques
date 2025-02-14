@@ -77,6 +77,23 @@
   -webkit-appearance: none; /* iOS fix */
   -moz-appearance: none; /* Firefox fix */
 }
+.instagram-link {
+    font-family: 'Public Sans', sans-serif;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 16px;
+    animation: flashingColors 1s infinite alternate;
+}
+
+@keyframes flashingColors {
+    0% { color: #FF0000; } /* Red */
+    20% { color: #FF7300; } /* Orange */
+    40% { color: #FFD700; } /* Gold */
+    60% { color: #32CD32; } /* Green */
+    80% { color: #1E90FF; } /* Blue */
+    100% { color: #8A2BE2; } /* Purple */
+}
+
     /* Navigation */
     nav {
       position: fixed;
@@ -427,9 +444,9 @@ body.error-active {
     <p>For inquiries, please email <a href="mailto:contact@champsmag.com" class="contact-email">contact@champsmag.com</a></p>
     <br>
     <br>
-    <p>
-        <a href="https://www.instagram.com/champsmagnetiques" target="_blank" class="instagram-link">@CHAMPSMAGNETIQUES</a>
-    </p>
+    <p> 
+    <a href="https://www.instagram.com/CHAMPSMAGNETIQUES" target="_blank" class="instagram-link">@CHAMPSMAGNETIQUES</a>
+</p>
   </section>
   
   <section id="purchase-form">
