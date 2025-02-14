@@ -567,18 +567,28 @@ body.error-active {
     if (userInput === correctPassword) {
         // Successful login
         localStorage.setItem("authenticated", "true");
+
+        // Hide the password overlay and show the correct section
         document.getElementById("password-overlay").style.display = "none";
         document.querySelector("nav").style.display = "block"; // Ensure nav is visible
+
+        // Reset body background color and remove error class
+        document.body.classList.remove("error-active");
+        document.body.style.backgroundColor = "#D8D0B8"; // Reset to the original background color
+
+        // Hide the error overlay just in case it's still there
+        document.getElementById("error-overlay").style.display = "none";
+
         showSection("maison");
     } else {
-        // Hide ALL elements including nav
+        // Hide all sections including password overlay
         document.querySelectorAll("section").forEach(s => s.style.display = "none");
         document.getElementById("password-overlay").style.display = "none";
         document.querySelector("nav").style.display = "none"; // Hide navigation
-        
+
         // Show full-screen error
         document.getElementById("error-overlay").style.display = "flex";
-        document.body.classList.add("error-active");
+        document.body.classList.add("error-active"); // Forces background color change
 
         // Reset after 1.5 seconds
         setTimeout(() => {
@@ -586,6 +596,8 @@ body.error-active {
             document.getElementById("password-input").value = "";
             document.getElementById("password-overlay").style.display = "flex";
             document.querySelector("nav").style.display = "block"; // Restore nav
+            document.body.classList.remove("error-active"); // Reset background after error disappears
+            document.body.style.backgroundColor = "#D8D0B8"; // Reset background to default
         }, 1500);
     }
 }
