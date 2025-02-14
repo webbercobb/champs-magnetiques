@@ -80,11 +80,12 @@
 }
 .instagram-marquee {
   position: fixed;
-  bottom: 20px; /* Adjust how far from the bottom */
+  bottom: 20px; /* Adjust this to move it further up or down */
   left: 0;
   width: 100%;
   overflow: hidden;
   white-space: nowrap;
+  display: flex;
 }
 
 .marquee-content {
@@ -96,12 +97,17 @@
   animation: scroll-left 10s linear infinite, flashingColors 1s infinite alternate;
 }
 
+.marquee-wrapper {
+  display: flex;
+  min-width: 200%; /* Ensures seamless looping */
+}
+
 @keyframes scroll-left {
   from {
-    transform: translateX(100%);
+    transform: translateX(0%);
   }
   to {
-    transform: translateX(-100%);
+    transform: translateX(-50%);
   }
 }
 
@@ -465,10 +471,15 @@ body.error-active {
   <p>For inquiries, please email <a href="mailto:contact@champsmag.com" class="contact-email">contact@champsmag.com</a></p>
   
   <div class="instagram-marquee">
+  <div class="marquee-wrapper">
     <a href="https://www.instagram.com/CHAMPSMAGNETIQUES" target="_blank" class="marquee-content">
-      @CHAMPSMAGNETIQUES  @CHAMPSMAGNETIQUES  @CHAMPSMAGNETIQUES  @CHAMPSMAGNETIQUES  @CHAMPSMAGNETIQUES  @CHAMPSMAGNETIQUES  @CHAMPSMAGNETIQUES  @CHAMPSMAGNETIQUES  @CHAMPSMAGNETIQUES  @CHAMPSMAGNETIQUES
+      @CHAMPSMAGNETIQUES @CHAMPSMAGNETIQUES @CHAMPSMAGNETIQUES @CHAMPSMAGNETIQUES @CHAMPSMAGNETIQUES
+    </a>
+    <a href="https://www.instagram.com/CHAMPSMAGNETIQUES" target="_blank" class="marquee-content">
+      @CHAMPSMAGNETIQUES @CHAMPSMAGNETIQUES @CHAMPSMAGNETIQUES @CHAMPSMAGNETIQUES @CHAMPSMAGNETIQUES
     </a>
   </div>
+</div>
 </section>
   
   <section id="purchase-form">
