@@ -88,29 +88,33 @@
   display: flex;
 }
 
+.marquee-wrapper {
+  display: flex;
+  width: 200%; /* Ensures smooth looping */
+}
+
 .marquee-content {
   display: inline-block;
   font-family: 'Public Sans', sans-serif;
   font-weight: bold;
-  font-size: 16px;
+  font-size: 14px; /* Matches the contact email font size */
   text-decoration: none;
   animation: scroll-left 10s linear infinite, flashingColors 1s infinite alternate;
+  white-space: nowrap;
+  padding-right: 10px; /* Adds some space between loops */
 }
 
-.marquee-wrapper {
-  display: flex;
-  min-width: 200%; /* Ensures seamless looping */
-}
-
+/* Smooth scrolling animation */
 @keyframes scroll-left {
   from {
     transform: translateX(0%);
   }
   to {
-    transform: translateX(-50%);
+    transform: translateX(-100%);
   }
 }
 
+/* Flashing colors animation */
 @keyframes flashingColors {
   0% { color: #FF0000; } /* Red */
   20% { color: #FF7300; } /* Orange */
@@ -118,6 +122,15 @@
   60% { color: #32CD32; } /* Green */
   80% { color: #1E90FF; } /* Blue */
   100% { color: #8A2BE2; } /* Purple */
+}
+
+/* Match the contact email styling */
+.contact-email {
+  font-family: 'Public Sans', sans-serif;
+  font-size: 14px; /* Ensure both use the same size */
+  font-weight: bold;
+  text-decoration: none;
+  color: #de1201;
 }
 
     /* Navigation */
@@ -291,12 +304,7 @@
       margin-bottom: 30px;
     }
 
-    /* Contact */
-    .contact-email {
-      color: #de1201;
-      font-weight: bold;
-      margin-top: -20px; /* Moves it slightly higher */
-}
+    
     
 
     /* Error Overlay */
