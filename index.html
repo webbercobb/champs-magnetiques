@@ -658,18 +658,13 @@ Additional Info: ${data['additional-info'] || 'N/A'}`;
     }
 
     // Initialization
+    // Corrected Initialization
     document.addEventListener("DOMContentLoaded", function() {
         // Check authentication
         if (localStorage.getItem("authenticated") === "true") {
-          document.getElementById("error-overlay").style.display = "none";
-        document.body.classList.remove("error-active");
-        document.body.style.backgroundColor = "#D8D0B8";
-        
-        document.getElementById("password-overlay").style.display = "none";
-        showSection("maison");
-    } else {
-        document.getElementById("password-overlay").style.display = "flex";
-    }
+            document.getElementById("error-overlay").style.display = "none";
+            document.body.classList.remove("error-active");
+            document.body.style.backgroundColor = "#D8D0B8";
             document.getElementById("password-overlay").style.display = "none";
             showSection("maison");
         } else {
