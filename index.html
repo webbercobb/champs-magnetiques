@@ -148,13 +148,14 @@
     /* Concept Page */
     .concept-container {
   display: flex;
-  flex-direction: column; /* Forces elements to stack vertically */
-  align-items: flex-start; /* Aligns text to the left */
-  justify-content: flex-start;
+  flex-direction: column;
+  align-items: center; /* Centers all elements */
+  justify-content: center; /* Vertically centers content */
   width: 100%;
   max-width: 600px;
+  min-height: 100vh; /* Ensures full height */
   margin: 0 auto;
-  text-align: left;
+  text-align: center;
 }
 
     /* Carousel Styles */
@@ -259,6 +260,9 @@ body.error-active {
   max-width: 80%; /* Keep it visually balanced */
 }
 .concepts-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: rgba(0, 0, 0, 0.1); /* Subtle muted tone */
   color: black; /* Keep text black */
   border: none; /* No borders for a sleek look */
@@ -267,6 +271,9 @@ body.error-active {
   font-size: 14px;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
+  width: 250px;
+  text-align: center;
+  margin: 20px auto; /* Centers button */
 }
 
 .concepts-button:hover {
@@ -582,10 +589,13 @@ body.error-active {
         document.body.style.backgroundColor = "#D8D0B8"; // Reset background color
 
         // REMOVE the error overlay from the DOM completely
-        const errorOverlay = document.getElementById("error-overlay");
-        if (errorOverlay) {
-            errorOverlay.remove(); // Deletes it entirely
-        }
+        setTimeout(() => {
+    const errorOverlay = document.getElementById("error-overlay");
+    if (errorOverlay) {
+        errorOverlay.style.display = "none"; // Just hide it
+        errorOverlay.innerHTML = ""; // Clears its content (removes 'Non-lieu')
+    }
+}, 1500);
 
         showSection("maison");
     } else {
