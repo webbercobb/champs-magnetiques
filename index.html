@@ -348,6 +348,7 @@ body.error-active {
 #purchase-form {
   display: none;
   padding: 40px 20px;
+  flex-direction: column; /* Add this */
 }
 
 #purchase-form.active {
@@ -424,7 +425,9 @@ body.error-active {
     <form action="https://formsubmit.co/shop@champsmag.com" method="POST">
        type="hidden" name="_captcha" value="false"> <!-- Disables annoying Captcha -->
     <input type="hidden" name="_next" value="https://yourwebsite.com/thank-you">
-    <input type="hidden" name="_captcha" value="false">  <!-- Optional: Disable captcha -->
+    <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" id="concept-name" name="Concept Name">
+          <!-- Optional: Disable captcha -->
     
     <label for="full-name">Full Name:</label>
     <input type="text" id="full-name" name="Full Name" required>
@@ -671,9 +674,19 @@ setTimeout(() => {
 
     // Purchase form functions
     function showPurchaseForm(conceptId) {
-        document.getElementById('concept-name').value = concepts[conceptId].title;
-        showSection('purchase-form');
-    }
+    const concept = concepts[conceptId];
+    document.getElementById('concept-name').value = concept.title;
+    
+    // Hide all sections
+    document.querySelectorAll("section").forEach(section => {
+        section.style.display = "none";
+    });
+    
+    // Show purchase form with correct display
+    const purchaseForm = document.getElementById('purchase-form');
+    purchaseForm.style.display = "flex";
+    purchaseForm.classList.add('active');
+}
     
     
 
