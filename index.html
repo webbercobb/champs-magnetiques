@@ -656,23 +656,31 @@ Additional Info: ${data['additional-info'] || 'N/A'}`;
 
     // Initialization
     document.addEventListener("DOMContentLoaded", function() {
-        // Check authentication
-        if (localStorage.getItem("authenticated") === "true") {
-            document.getElementById("password-overlay").style.display = "none";
-            showSection("maison");
-        } else {
-            document.getElementById("password-overlay").style.display = "flex";
-        }
+    // Always ensure error overlay is hidden on page load
+    const errorOverlay = document.getElementById("error-overlay");
+    if (errorOverlay) {
+        errorOverlay.style.display = "none";
+        errorOverlay.innerHTML = ""; // Clears "Non-lieu" text to prevent it from persisting
+    }
 
-        // Navigation click handlers
-        document.querySelectorAll("nav a").forEach(link => {
-            link.addEventListener("click", (e) => {
-                e.preventDefault();
-                const section = link.getAttribute("onclick").replace("showSection('", "").replace("')", "");
-                showSection(section);
-            });
+    // Check authentication
+    if (localStorage.getItem("authenticated") === "true") {
+        document.getElementById("password-overlay").style.display = "none";
+        document.body.classList.remove("error-active"); // Ensures background resets properly
+        showSection("maison");
+    } else {
+        document.getElementById("password-overlay").style.display = "flex";
+    }
+
+    // Navigation click handlers
+    document.querySelectorAll("nav a").forEach(link => {
+        link.addEventListener("click", (e) => {
+            e.preventDefault();
+            const section = link.getAttribute("onclick").replace("showSection('", "").replace("')", "");
+            showSection(section);
         });
     });
+});
 </script>
 
 </body>
