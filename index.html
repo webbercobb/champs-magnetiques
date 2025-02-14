@@ -540,66 +540,46 @@
 
 <!-- Fix the showSection function in the second script tag -->
 <script>
+    // Consolidated showSection function
     function showSection(sectionId) {
-  // Hide error overlay when navigating
-  document.getElementById("error-overlay").style.display = "none";
-  
-  // Hide all sections
-  document.querySelectorAll("section").forEach(section => {
-    section.style.display = "none";
-  });
-
-  // Show requested section
-  const targetSection = document.getElementById(sectionId);
-  if (targetSection) {
-    targetSection.style.display = "flex"; // Changed to flex to match others
-  }
-}
-</script>
-  <script>
-    // Consolidated showSection function (SINGLE VERSION)
-    function showSection(sectionId) {
-        // Hide error overlay
-        document.getElementById("error-overlay").style.display = "none";
         // Hide all sections
         document.querySelectorAll("section").forEach(section => {
-            section.classList.remove("active");
             section.style.display = "none";
         });
-        // Show target section
+        
+        // Show requested section
         const targetSection = document.getElementById(sectionId);
         if (targetSection) {
-            targetSection.classList.add("active");
             targetSection.style.display = "flex";
         }
     }
 
     // Password check function
     function checkPassword() {
-    const correctPassword = "cecin'estpasunmotdepasse";
-    const userInput = document.getElementById("password-input").value;
+        const correctPassword = "cecin'estpasunmotdepasse";
+        const userInput = document.getElementById("password-input").value;
 
-    if (userInput === correctPassword) {
-        // Successful login
-        document.querySelector('meta[name="viewport"]').content = 
-            "width=device-width, initial-scale=1.0, maximum-scale=1.0";
-        localStorage.setItem("authenticated", "true");
-        document.getElementById("password-overlay").style.display = "none";
-        showSection("maison");
-    } else {
-        // Failed login: Hide password overlay first
-        document.getElementById("password-overlay").style.display = "none";
-        // Show error overlay
-        document.getElementById("error-overlay").style.display = "flex";
-        
-        setTimeout(() => {
-            // Hide error and re-show password prompt
-            document.getElementById("error-overlay").style.display = "none";
-            document.getElementById("password-input").value = "";
-            document.getElementById("password-overlay").style.display = "flex";
-        }, 1500);
+        if (userInput === correctPassword) {
+            // Successful login
+            localStorage.setItem("authenticated", "true");
+            document.getElementById("password-overlay").style.display = "none";
+            showSection("maison");
+        } else {
+            // Hide ALL elements
+            document.querySelectorAll("section").forEach(s => s.style.display = "none");
+            document.getElementById("password-overlay").style.display = "none";
+            
+            // Show full-screen error
+            document.getElementById("error-overlay").style.display = "flex";
+
+            // Reset after 1.5 seconds
+            setTimeout(() => {
+                document.getElementById("error-overlay").style.display = "none";
+                document.getElementById("password-input").value = "";
+                document.getElementById("password-overlay").style.display = "flex";
+            }, 1500);
+        }
     }
-}
 
     // Purchase form functions
     function showPurchaseForm(conceptId) {
@@ -628,7 +608,7 @@ Additional Info: ${data['additional-info'] || 'N/A'}`;
         showSection('concept-page');
     }
 
-    // On page load
+    // Initialization
     document.addEventListener("DOMContentLoaded", function() {
         // Check authentication
         if (localStorage.getItem("authenticated") === "true") {
@@ -638,7 +618,7 @@ Additional Info: ${data['additional-info'] || 'N/A'}`;
             document.getElementById("password-overlay").style.display = "flex";
         }
 
-        // Setup navigation click handlers
+        // Navigation click handlers
         document.querySelectorAll("nav a").forEach(link => {
             link.addEventListener("click", (e) => {
                 e.preventDefault();
