@@ -227,10 +227,13 @@
     }
 
     /* Manifesto */
-    .manifesto-container {
+    #manifeste {
+  /* Remove min-height and flex properties */
+  padding: 80px 20px; /* Direct padding control */
+}
+
+.manifesto-container {
   max-width: 600px;
-  width: 100%;
-  padding: 80px 20px; /* Consistent padding */
   margin: 0 auto;
 }
 
@@ -401,7 +404,8 @@ body.error-active {
   <section id="concept-page" class="concept-container"></section>
 
   <section id="manifeste">
-    <div class="manifesto-container">
+  <div class="manifesto-container">
+    <div style="height: 40px"></div> 
       <p class="manifesto">Surrealism was born after war. After collapse. After the world proved itself untrustworthy. It is happening again.</p>
       <p class="manifesto">The reaction is fear. Rigid borders. Tight uniforms. Forced nostalgia for a past that never existed.</p>
       <p class="manifesto">Fashion is a tool of control. So we weaponize it. We take what is fixed and make it move. We take what is obedient and break it.</p>
@@ -596,6 +600,19 @@ body.error-active {
             targetSection.style.display = "flex";
         }
     }
+    function showSection(sectionId) {
+  // Reset scroll position to top
+  window.scrollTo(0, 0);
+  
+  document.querySelectorAll("section").forEach(section => {
+    section.style.display = "none";
+  });
+  
+  const targetSection = document.getElementById(sectionId);
+  if (targetSection) {
+    targetSection.style.display = "block";
+  }
+}
 
     // Password check function
     function checkPassword() {
@@ -657,6 +674,8 @@ setTimeout(() => {
         document.getElementById('concept-name').value = concepts[conceptId].title;
         showSection('purchase-form');
     }
+    
+    
 
     function handleFormSubmit(event) {
         event.preventDefault();
