@@ -225,13 +225,18 @@
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  background: #DD1101 !important; /* Nuclear option */
+  width: 100vw;
+  height: 100vh;
+  background-color: #DD1101 !important; /* Ensure override */
   z-index: 99999;
   display: none;
   align-items: center;
   justify-content: center;
+}
+
+/* ALSO FORCE BODY TO MATCH ERROR COLOR WHEN ACTIVE */
+body.error-active {
+  background-color: #DD1101 !important;
 }
    
 
@@ -573,6 +578,7 @@
         
         // Show full-screen error
         document.getElementById("error-overlay").style.display = "flex";
+        document.body.classList.add("error-active");
 
         // Reset after 1.5 seconds
         setTimeout(() => {
