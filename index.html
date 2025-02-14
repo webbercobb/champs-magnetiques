@@ -171,17 +171,15 @@
     .concept-container {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centers all elements */
-  justify-content: center; /* Vertically centers content */
+  align-items: center; /* Centers content horizontally */
+  justify-content: flex-start; /* Ensures content is scrollable if needed */
   width: 100%;
   max-width: 600px;
   min-height: 100vh; /* Ensures full height */
-  padding: 200px 20px;
-  margin: 0 auto;
+  padding: 80px 20px; /* Adjust padding to move it slightly down */
+  margin: 0 auto; /* Centers horizontally */
   text-align: center;
-  position: absolute;
-  top: 50%;
-  left: 50%;
+
 }
 
     /* Carousel Styles */
