@@ -77,14 +77,6 @@
   -webkit-appearance: none; /* iOS fix */
   -moz-appearance: none; /* Firefox fix */
 }
-#error-overlay {
-  display: none; /* Completely hide it */
-  visibility: hidden; /* Ensure it never flashes */
-  opacity: 0; /* Fully transparent */
-  pointer-events: none; /* Prevent accidental interaction */
-  position: fixed; /* Ensure it's off-screen */
-  top: 100vh; /* Push it way out of view */
-}
     /* Navigation */
     nav {
       position: fixed;
@@ -253,30 +245,21 @@
       color: #de1201;
       font-weight: bold;
       margin-top: -5vh; /* Moves it slightly higher */
-
+}
     }
 
     /* Error Overlay */
-   #error-overlay {
+    #error-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: #DD1101 !important;
+  background-color: #DD1101 !important; /* Ensure override */
+  z-index: 99999;
   display: none;
   align-items: center;
   justify-content: center;
-  z-index: 99999;
-  visibility: hidden;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-#error-overlay.active {
-  display: flex;
-  visibility: visible;
-  opacity: 1;
 }
 
 /* ALSO FORCE BODY TO MATCH ERROR COLOR WHEN ACTIVE */
@@ -615,24 +598,57 @@ body.error-active {
 
     // Password check function
     function checkPassword() {
-  const correctPassword = "cecin'estpasunmotdepasse";
-  const userInput = document.getElementById("password-input").value;
-  const errorOverlay = document.getElementById("error-overlay");
+    const correctPassword = "cecin'estpasunmotdepasse";
+    const userInput = document.getElementById("password-input").value;
 
-  if (userInput === correctPassword) {
-    // Successful login logic
-  } else {
-    // Show error overlay
-    errorOverlay.classList.add('active');
-    document.body.classList.add("error-active");
+    // Successful login
+if (userInput === correctPassword) {
+    localStorage.setItem("authenticated", "true");
+    
+    // Immediately reset error states
+    document.body.classList.remove("error-active");
+    document.body.style.backgroundColor = "#D8D0B8";
+    const errorOverlay = document.getElementById("error-overlay");
+    if (errorOverlay) {
+        errorOverlay.style.display = "none";
+        errorOverlay.innerHTML = '<p id="error-message">Non-lieu</p>'; // Restore message if cleared
+    }
 
-    // Hide after 1.5 seconds
-    setTimeout(() => {
-      errorOverlay.classList.remove('active');
-      document.body.classList.remove("error-active");
-      document.getElementById("password-overlay").style.display = "flex";
-    }, 1500);
-  }
+    // Hide password overlay and show content
+    document.getElementById("password-overlay").style.display = "none";
+    document.querySelector("nav").style.display = "block";
+    showSection("maison");
+    
+    // REMOVE the setTimeout block entirely from here
+} else {
+        // Hide all sections including password overlay
+        document.querySelectorAll("section").forEach(s => s.style.display = "none");
+        document.getElementById("password-overlay").style.display = "none";
+        document.querySelector("nav").style.display = "none"; // Hide navigation
+
+        // Show full-screen error
+        document.getElementById("error-overlay").style.display = "flex";
+        document.body.classList.add("error-active"); // Forces background color change
+
+        // AUTOMATIC RESET AFTER 1.5 SECONDS
+        // Wrong password
+setTimeout(() => {
+    // Instead of removing, just hide and reset
+    const errorOverlay = document.getElementById("error-overlay");
+    if (errorOverlay) {
+        errorOverlay.style.display = "none";
+    }
+    
+    // Restore password input
+    document.getElementById("password-input").value = "";
+    document.getElementById("password-overlay").style.display = "flex";
+    document.querySelector("nav").style.display = "block";
+    
+    // Reset body styles
+    document.body.classList.remove("error-active"); 
+    document.body.style.backgroundColor = "#D8D0B8";
+}, 1500);
+    }
 }
 
     // Purchase form functions
