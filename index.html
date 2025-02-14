@@ -573,29 +573,42 @@ body.error-active {
 
     // Password check function
     function checkPassword() {
-    const correctPassword = "cecin'estpasunmotdepasse";
-    const userInput = document.getElementById("password-input").value;
+        const correctPassword = "cecin'estpasunmotdepasse";
+        const userInput = document.getElementById("password-input").value;
+        const errorOverlay = document.getElementById("error-overlay");
 
-    if (userInput === correctPassword) {
-        // Successful login
-        localStorage.setItem("authenticated", "true");
+        if (userInput === correctPassword) {
+            // Successful login
+            localStorage.setItem("authenticated", "true");
 
-        // Hide password overlay and show correct section
-        document.getElementById("password-overlay").style.display = "none";
-        document.querySelector("nav").style.display = "block"; // Ensure nav is visible
+            // Immediately reset all error states
+            errorOverlay.style.display = "none";
+            document.body.classList.remove("error-active");
+            document.body.style.backgroundColor = "#D8D0B8";
 
-        // FULL RESET: Remove red background, error message, and reset site visuals
-        document.body.classList.remove("error-active");
-        document.body.style.backgroundColor = "#D8D0B8"; // Reset background color
+            // Hide overlays and show content
+            document.getElementById("password-overlay").style.display = "none";
+            document.querySelector("nav").style.display = "block";
+            showSection("maison");
 
-        // REMOVE the error overlay from the DOM completely
-        setTimeout(() => {
-    const errorOverlay = document.getElementById("error-overlay");
-    if (errorOverlay) {
-        errorOverlay.style.display = "none"; // Just hide it
-        errorOverlay.innerHTML = ""; // Clears its content (removes 'Non-lieu')
-    }
-}, 1500);
+        } else {
+            // Hide all content
+            document.querySelectorAll("section").forEach(s => s.style.display = "none");
+            document.getElementById("password-overlay").style.display = "none";
+            document.querySelector("nav").style.display = "none";
+
+            // Show error
+            errorOverlay.style.display = "flex";
+            document.body.classList.add("error-active");
+
+            // Reset after timeout
+            setTimeout(() => {
+                errorOverlay.style.display = "none";
+                document.body.classList.remove("error-active");
+                document.getElementById("password-input").value = "";
+                document.getElementById("password-overlay").style.display = "flex";
+                document.querySelector("nav").style.display = "block";
+            }, 1500);
 
         showSection("maison");
     } else {
