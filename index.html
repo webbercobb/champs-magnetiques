@@ -328,6 +328,10 @@ body.error-active {
   display: flex;
 }
 
+#error-overlay {
+    display: none !important; /* Force initial hidden state */
+}
+
 .form-container {
   width: 100%;
   max-width: 600px;
@@ -657,6 +661,15 @@ Additional Info: ${data['additional-info'] || 'N/A'}`;
     document.addEventListener("DOMContentLoaded", function() {
         // Check authentication
         if (localStorage.getItem("authenticated") === "true") {
+          document.getElementById("error-overlay").style.display = "none";
+        document.body.classList.remove("error-active");
+        document.body.style.backgroundColor = "#D8D0B8";
+        
+        document.getElementById("password-overlay").style.display = "none";
+        showSection("maison");
+    } else {
+        document.getElementById("password-overlay").style.display = "flex";
+    }
             document.getElementById("password-overlay").style.display = "none";
             showSection("maison");
         } else {
