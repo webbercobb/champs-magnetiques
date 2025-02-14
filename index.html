@@ -77,6 +77,14 @@
   -webkit-appearance: none; /* iOS fix */
   -moz-appearance: none; /* Firefox fix */
 }
+#error-overlay {
+  display: none !important; /* Completely hide it */
+  visibility: hidden; /* Ensure it never flashes */
+  opacity: 0; /* Fully transparent */
+  pointer-events: none; /* Prevent accidental interaction */
+  position: fixed; /* Ensure it's off-screen */
+  top: 100vh; /* Push it way out of view */
+}
     /* Navigation */
     nav {
       position: fixed;
