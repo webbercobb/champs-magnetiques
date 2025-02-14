@@ -53,6 +53,9 @@
       box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
       text-align: center;
       min-width: 280px;
+      display: flex;
+  align-items: center; /* Ensures perfect vertical alignment */
+  gap: 6px;
     }
     .password-container h2 {
   margin-top: -15px; /* Moves the text slightly up */
@@ -62,12 +65,17 @@
 .password-container button {
   height: 25px; /* Set equal height */
   font-size: 12px; /* Ensure consistent text size */
-  padding: 2px 8px; /* Ensure similar internal spacing */
-    line-height: 1; /* Ensures cons
-  border-radius: 6px; /* Match rounded corners */
-  border: none; /* Optional: remove default borders */
+  padding: 4px 8px; /* Ensure similar internal spacing */
+    line-height: 1;
+    border-radius: 6px;
+    border: none; /* Optional: remove default borders */
 }
-
+.password-container button {
+  border-radius: 6px !important; /* Force rounded corners */
+  appearance: none; /* Prevents browser-specific styling */
+  -webkit-appearance: none; /* iOS fix */
+  -moz-appearance: none; /* Firefox fix */
+}
     /* Navigation */
     nav {
       position: fixed;
