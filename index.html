@@ -556,30 +556,33 @@
 
     // Password check function
     function checkPassword() {
-        const correctPassword = "cecin'estpasunmotdepasse";
-        const userInput = document.getElementById("password-input").value;
+    const correctPassword = "cecin'estpasunmotdepasse";
+    const userInput = document.getElementById("password-input").value;
 
-        if (userInput === correctPassword) {
-            // Successful login
-            localStorage.setItem("authenticated", "true");
-            document.getElementById("password-overlay").style.display = "none";
-            showSection("maison");
-        } else {
-            // Hide ALL elements
-            document.querySelectorAll("section").forEach(s => s.style.display = "none");
-            document.getElementById("password-overlay").style.display = "none";
-            
-            // Show full-screen error
-            document.getElementById("error-overlay").style.display = "flex";
+    if (userInput === correctPassword) {
+        // Successful login
+        localStorage.setItem("authenticated", "true");
+        document.getElementById("password-overlay").style.display = "none";
+        document.querySelector("nav").style.display = "block"; // Ensure nav is visible
+        showSection("maison");
+    } else {
+        // Hide ALL elements including nav
+        document.querySelectorAll("section").forEach(s => s.style.display = "none");
+        document.getElementById("password-overlay").style.display = "none";
+        document.querySelector("nav").style.display = "none"; // Hide navigation
+        
+        // Show full-screen error
+        document.getElementById("error-overlay").style.display = "flex";
 
-            // Reset after 1.5 seconds
-            setTimeout(() => {
-                document.getElementById("error-overlay").style.display = "none";
-                document.getElementById("password-input").value = "";
-                document.getElementById("password-overlay").style.display = "flex";
-            }, 1500);
-        }
+        // Reset after 1.5 seconds
+        setTimeout(() => {
+            document.getElementById("error-overlay").style.display = "none";
+            document.getElementById("password-input").value = "";
+            document.getElementById("password-overlay").style.display = "flex";
+            document.querySelector("nav").style.display = "block"; // Restore nav
+        }, 1500);
     }
+}
 
     // Purchase form functions
     function showPurchaseForm(conceptId) {
