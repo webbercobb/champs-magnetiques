@@ -568,16 +568,19 @@ body.error-active {
         // Successful login
         localStorage.setItem("authenticated", "true");
 
-        // Hide the password overlay and show the correct section
+        // Hide password overlay and show correct section
         document.getElementById("password-overlay").style.display = "none";
         document.querySelector("nav").style.display = "block"; // Ensure nav is visible
 
-        // Reset body background color and remove error class
+        // FULL RESET: Remove red background, error message, and reset site visuals
         document.body.classList.remove("error-active");
-        document.body.style.backgroundColor = "#D8D0B8"; // Reset to the original background color
+        document.body.style.backgroundColor = "#D8D0B8"; // Reset background color
 
-        // Hide the error overlay just in case it's still there
-        document.getElementById("error-overlay").style.display = "none";
+        // REMOVE the error overlay from the DOM completely
+        const errorOverlay = document.getElementById("error-overlay");
+        if (errorOverlay) {
+            errorOverlay.remove(); // Deletes it entirely
+        }
 
         showSection("maison");
     } else {
@@ -590,14 +593,21 @@ body.error-active {
         document.getElementById("error-overlay").style.display = "flex";
         document.body.classList.add("error-active"); // Forces background color change
 
-        // Reset after 1.5 seconds
+        // AUTOMATIC RESET AFTER 1.5 SECONDS
         setTimeout(() => {
-            document.getElementById("error-overlay").style.display = "none";
+            // REMOVE error message from the DOM completely
+            const errorOverlay = document.getElementById("error-overlay");
+            if (errorOverlay) {
+                errorOverlay.remove(); // This fully deletes "Non-lieu" so it can't linger
+            }
+
             document.getElementById("password-input").value = "";
             document.getElementById("password-overlay").style.display = "flex";
             document.querySelector("nav").style.display = "block"; // Restore nav
-            document.body.classList.remove("error-active"); // Reset background after error disappears
-            document.body.style.backgroundColor = "#D8D0B8"; // Reset background to default
+
+            // GUARANTEED full reset of background
+            document.body.classList.remove("error-active"); 
+            document.body.style.backgroundColor = "#D8D0B8"; // Ensure background returns to default
         }, 1500);
     }
 }
