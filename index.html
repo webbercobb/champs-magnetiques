@@ -239,6 +239,12 @@
   align-items: center;
   justify-content: center;
 }
+#error-message {
+  display: none;
+}
+body.error-active #error-message {
+  display: block;
+}
 
 /* ALSO FORCE BODY TO MATCH ERROR COLOR WHEN ACTIVE */
 body.error-active {
@@ -592,10 +598,10 @@ body.error-active {
         setTimeout(() => {
     const errorOverlay = document.getElementById("error-overlay");
     if (errorOverlay) {
-        errorOverlay.style.display = "none"; // Just hide it
-        errorOverlay.innerHTML = ""; // Clears its content (removes 'Non-lieu')
+        errorOverlay.style.display = "none"; // Hide the overlay
+        document.getElementById("error-message").innerText = ""; // Ensure "Non-lieu" text is erased
     }
-}, 1500);
+}, 500);
 
         showSection("maison");
     } else {
@@ -605,7 +611,8 @@ body.error-active {
         document.querySelector("nav").style.display = "none"; // Hide navigation
 
         // Show full-screen error
-        document.getElementById("error-overlay").style.display = "flex";
+        document.getElementById("error-overlay").style.display = "none";
+document.getElementById("error-message").innerText = ""; // Clears "Non-lieu"
         document.body.classList.add("error-active"); // Forces background color change
 
         // AUTOMATIC RESET AFTER 1.5 SECONDS
@@ -656,23 +663,34 @@ Additional Info: ${data['additional-info'] || 'N/A'}`;
 
     // Initialization
     document.addEventListener("DOMContentLoaded", function() {
-        // Check authentication
-        if (localStorage.getItem("authenticated") === "true") {
-            document.getElementById("password-overlay").style.display = "none";
-            showSection("maison");
-        } else {
-            document.getElementById("password-overlay").style.display = "flex";
-        }
+    // Hide the error overlay and clear "Non-lieu" on page load
+    const errorOverlay = document.getElementById("error-overlay");
+    const errorMessage = document.getElementById("error-message");
+    
+    if (errorOverlay) {
+        errorOverlay.style.display = "none";
+    }
+    if (errorMessage) {
+        errorMessage.innerText = ""; // Ensure "Non-lieu" text is cleared
+    }
 
-        // Navigation click handlers
-        document.querySelectorAll("nav a").forEach(link => {
-            link.addEventListener("click", (e) => {
-                e.preventDefault();
-                const section = link.getAttribute("onclick").replace("showSection('", "").replace("')", "");
-                showSection(section);
-            });
+    // Check authentication
+    if (localStorage.getItem("authenticated") === "true") {
+        document.getElementById("password-overlay").style.display = "none";
+        showSection("maison");
+    } else {
+        document.getElementById("password-overlay").style.display = "flex";
+    }
+
+    // Navigation click handlers
+    document.querySelectorAll("nav a").forEach(link => {
+        link.addEventListener("click", (e) => {
+            e.preventDefault();
+            const section = link.getAttribute("onclick").replace("showSection('", "").replace("')", "");
+            showSection(section);
         });
     });
+});
 </script>
 
 </body>
