@@ -147,10 +147,15 @@
 
     /* Concept Page */
     .concept-container {
-      text-align: left;
-      width: 100%;
-      max-width: 600px;
-    }
+  display: flex;
+  flex-direction: column; /* Forces elements to stack vertically */
+  align-items: flex-start; /* Aligns text to the left */
+  justify-content: flex-start;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: left;
+}
 
     /* Carousel Styles */
     .carousel {
