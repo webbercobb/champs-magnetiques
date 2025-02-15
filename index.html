@@ -86,9 +86,12 @@
   overflow: hidden;
   white-space: nowrap;
   display: flex;
+  z-index: 9999
 }
 
 .marquee-wrapper {
+  position relative;
+  left: 0;
   display: flex;
   width: 200%; /* Ensures smooth looping */
 }
@@ -493,14 +496,19 @@ body.error-active {
         contact@champsmag.com
       </a>
     </p>
-    <div class="marquee-wrapper">
+    <!-- Before -->
+<div class="marquee-wrapper">
   <div class="marquee-animation-container">
-    <!-- Single continuous string -->
-    <a href="https://www.instagram.com/CHAMPSMAGNETIQUES" 
-       target="_blank" 
-       class="marquee-content">
-      @CHAMPSMAGNETIQUES@CHAMPSMAGNETIQUES@CHAMPSMAGNETIQUES@CHAMPSMAGNETIQUES@CHAMPSMAGNETIQUES@CHAMPSMAGNETIQUES@CHAMPSMAGNETIQUES@CHAMPSMAGNETIQUES@CHAMPSMAGNETIQUES@CHAMPSMAGNETIQUES
-    </a>
+    ...
+  </div>
+</div>
+
+<!-- After -->
+<div class="instagram-marquee"> <!-- Restore original positioning class -->
+  <div class="marquee-wrapper">
+    <div class="marquee-animation-container">
+      ...
+    </div>
   </div>
 </div>
 </section>
