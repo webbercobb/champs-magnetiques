@@ -678,20 +678,18 @@ body.error-active {
 <!-- Fix the showSection function in the second script tag -->
 <script>
     // Consolidated showSection function
-    function showSection(sectionId) {
-        // Hide all sections
-        document.querySelectorAll("section").forEach(section => {
-            section.style.display = "none";
-        });
-        
-        // Show requested section
-        const targetSection = document.getElementById(sectionId);
-        if (targetSection) {
-            targetSection.style.display = "flex";
-        }
-    }
-    function showSection(sectionId) {
-  // Reset scroll position to top
+    // Add this dedicated marquee restart function
+function restartMarquee() {
+  const marquee = document.querySelector('.marquee-content');
+  if (marquee) {
+    marquee.style.animation = 'none';
+    void marquee.offsetWidth; // Trigger reflow
+    marquee.style.animation = 'scroll-left 10s linear infinite, flashingColors 1s infinite alternate';
+  }
+}
+
+// Modified showSection function
+function showSection(sectionId) {
   window.scrollTo(0, 0);
   
   document.querySelectorAll("section").forEach(section => {
@@ -701,63 +699,53 @@ body.error-active {
   const targetSection = document.getElementById(sectionId);
   if (targetSection) {
     targetSection.style.display = "block";
+    
+    // Restart marquee when contact section is shown
+    if (sectionId === 'contact') {
+      setTimeout(restartMarquee, 50); // 50ms delay for DOM update
+    }
   }
 }
 
-    // Password check function
-    function checkPassword() {
-    const correctPassword = "cecin'estpasunmotdepasse";
-    const userInput = document.getElementById("password-input").value;
+// Updated checkPassword function
+function checkPassword() {
+  const correctPassword = "cecin'estpasunmotdepasse";
+  const userInput = document.getElementById("password-input").value;
 
-    // Successful login
-    if (userInput === correctPassword) {
-        localStorage.setItem("authenticated", "true");
-        
-        // Reset error states
-        document.body.classList.remove("error-active");
-        document.body.style.backgroundColor = "#D8D0B8";
-        const errorOverlay = document.getElementById("error-overlay");
-        if (errorOverlay) {
-            errorOverlay.style.display = "none";
-            errorOverlay.innerHTML = '<p id="error-message">Non-lieu</p>';
-        }
-
-        // Hide password overlay and show content
-        document.getElementById("password-overlay").style.display = "none";
-        document.querySelector("nav").style.display = "block";
-        showSection("maison");
-
-        // SAFE marquee animation restart
-        setTimeout(() => {
-            const marquee = document.querySelector('.marquee-content');
-            if (marquee) {
-                marquee.style.animation = 'none';
-                void marquee.offsetWidth; // Trigger reflow
-                marquee.style.animation = 'scroll-left 10s linear infinite, flashingColors 1s infinite alternate';
-            }
-        }, 100); // 100ms delay ensures DOM stability
-
-    } else {
-        // Wrong password handling
-        document.querySelectorAll("section").forEach(s => s.style.display = "none");
-        document.getElementById("password-overlay").style.display = "none";
-        document.querySelector("nav").style.display = "none";
-
-        // Show error
-        document.getElementById("error-overlay").style.display = "flex";
-        document.body.classList.add("error-active");
-
-        // Reset after 1.5s
-        setTimeout(() => {
-            const errorOverlay = document.getElementById("error-overlay");
-            if (errorOverlay) errorOverlay.style.display = "none";
-            document.getElementById("password-input").value = "";
-            document.getElementById("password-overlay").style.display = "flex";
-            document.querySelector("nav").style.display = "block";
-            document.body.classList.remove("error-active");
-            document.body.style.backgroundColor = "#D8D0B8";
-        }, 1500);
+  if (userInput === correctPassword) {
+    localStorage.setItem("authenticated", "true");
+    document.body.classList.remove("error-active");
+    document.body.style.backgroundColor = "#D8D0B8";
+    
+    const errorOverlay = document.getElementById("error-overlay");
+    if (errorOverlay) {
+      errorOverlay.style.display = "none";
     }
+
+    document.getElementById("password-overlay").style.display = "none";
+    document.querySelector("nav").style.display = "block";
+    showSection("maison");
+    
+    // Initialize marquee after successful login
+    setTimeout(restartMarquee, 100);
+    
+  } else {
+    // Keep your existing error handling
+    document.querySelectorAll("section").forEach(s => s.style.display = "none");
+    document.getElementById("password-overlay").style.display = "none";
+    document.querySelector("nav").style.display = "none";
+    document.getElementById("error-overlay").style.display = "flex";
+    document.body.classList.add("error-active");
+
+    setTimeout(() => {
+      document.getElementById("error-overlay").style.display = "none";
+      document.getElementById("password-input").value = "";
+      document.getElementById("password-overlay").style.display = "flex";
+      document.querySelector("nav").style.display = "block";
+      document.body.classList.remove("error-active");
+      document.body.style.backgroundColor = "#D8D0B8";
+    }, 1500);
+  }
 }
 
     // Purchase form functions
