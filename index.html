@@ -710,57 +710,53 @@ body.error-active {
     const userInput = document.getElementById("password-input").value;
 
     // Successful login
-if (userInput === correctPassword) {
-    localStorage.setItem("authenticated", "true");
-    
-    // Immediately reset error states
-    document.body.classList.remove("error-active");
-    document.body.style.backgroundColor = "#D8D0B8";
-    const errorOverlay = document.getElementById("error-overlay");
-    if (errorOverlay) {
-        errorOverlay.style.display = "none";
-        errorOverlay.innerHTML = '<p id="error-message">Non-lieu</p>'; // Restore message if cleared
-    }
+    if (userInput === correctPassword) {
+        localStorage.setItem("authenticated", "true");
+        
+        // Reset error states
+        document.body.classList.remove("error-active");
+        document.body.style.backgroundColor = "#D8D0B8";
+        const errorOverlay = document.getElementById("error-overlay");
+        if (errorOverlay) {
+            errorOverlay.style.display = "none";
+            errorOverlay.innerHTML = '<p id="error-message">Non-lieu</p>';
+        }
 
-    // Hide password overlay and show content
-    // After successful password entry
-document.getElementById("password-overlay").style.display = "none";
-showSection("maison");
+        // Hide password overlay and show content
+        document.getElementById("password-overlay").style.display = "none";
+        document.querySelector("nav").style.display = "block";
+        showSection("maison");
 
-// Force marquee animation restart
-const marquee = document.querySelector('.marquee-content');
-if (marquee) {
-  marquee.style.animation = 'none';
-  void marquee.offsetWidth; // Trigger reflow
-  marquee.style.animation = 'scroll-left 10s linear infinite, flashingColors 1s infinite alternate';
-} else {
-        // Hide all sections including password overlay
+        // SAFE marquee animation restart
+        setTimeout(() => {
+            const marquee = document.querySelector('.marquee-content');
+            if (marquee) {
+                marquee.style.animation = 'none';
+                void marquee.offsetWidth; // Trigger reflow
+                marquee.style.animation = 'scroll-left 10s linear infinite, flashingColors 1s infinite alternate';
+            }
+        }, 100); // 100ms delay ensures DOM stability
+
+    } else {
+        // Wrong password handling
         document.querySelectorAll("section").forEach(s => s.style.display = "none");
         document.getElementById("password-overlay").style.display = "none";
-        document.querySelector("nav").style.display = "none"; // Hide navigation
+        document.querySelector("nav").style.display = "none";
 
-        // Show full-screen error
+        // Show error
         document.getElementById("error-overlay").style.display = "flex";
-        document.body.classList.add("error-active"); // Forces background color change
+        document.body.classList.add("error-active");
 
-        // AUTOMATIC RESET AFTER 1.5 SECONDS
-        // Wrong password
-setTimeout(() => {
-    // Instead of removing, just hide and reset
-    const errorOverlay = document.getElementById("error-overlay");
-    if (errorOverlay) {
-        errorOverlay.style.display = "none";
-    }
-    
-    // Restore password input
-    document.getElementById("password-input").value = "";
-    document.getElementById("password-overlay").style.display = "flex";
-    document.querySelector("nav").style.display = "block";
-    
-    // Reset body styles
-    document.body.classList.remove("error-active"); 
-    document.body.style.backgroundColor = "#D8D0B8";
-}, 1500);
+        // Reset after 1.5s
+        setTimeout(() => {
+            const errorOverlay = document.getElementById("error-overlay");
+            if (errorOverlay) errorOverlay.style.display = "none";
+            document.getElementById("password-input").value = "";
+            document.getElementById("password-overlay").style.display = "flex";
+            document.querySelector("nav").style.display = "block";
+            document.body.classList.remove("error-active");
+            document.body.style.backgroundColor = "#D8D0B8";
+        }, 1500);
     }
 }
 
