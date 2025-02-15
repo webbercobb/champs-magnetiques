@@ -723,12 +723,16 @@ if (userInput === correctPassword) {
     }
 
     // Hide password overlay and show content
-    document.getElementById("password-overlay").style.display = "none";
-    document.querySelector("nav").style.display = "block";
-    showSection("maison");
-        // Restart marquee animation after unlocking the site
-    restartMarquee();
-    // REMOVE the setTimeout block entirely from here
+    // After successful password entry
+document.getElementById("password-overlay").style.display = "none";
+showSection("maison");
+
+// Force marquee animation restart
+const marquee = document.querySelector('.marquee-content');
+if (marquee) {
+  marquee.style.animation = 'none';
+  void marquee.offsetWidth; // Trigger reflow
+  marquee.style.animation = 'scroll-left 10s linear infinite, flashingColors 1s infinite alternate';
 } else {
         // Hide all sections including password overlay
         document.querySelectorAll("section").forEach(s => s.style.display = "none");
