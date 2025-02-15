@@ -127,13 +127,17 @@
 /* Match the contact email styling */
 .contact-email {
   font-family: 'Public Sans', sans-serif;
-  font-size: 14px; /* Ensure both use the same size */
+  font-size: 14px;
   font-weight: bold;
   text-decoration: none;
   color: #de1201;
   position: relative;
-  margin-top:-20px;
-  
+  margin-top: -15px; /* Add this line */
+  display: block; /* Add this to ensure proper spacing */
+}
+#contact p {
+  margin-top: -30px; /* Moves entire text block upward */
+  margin-bottom: 40px; /* Compensates for reduced space */
 }
 
     /* Navigation */
