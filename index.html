@@ -718,70 +718,39 @@ function showSection(sectionId) {
 
 // Updated checkPassword function
 function checkPassword() {
-  // Get and sanitize input FIRST
+  // Improved sanitization
+  const sanitize = (str) => {
+    return str
+      .normalize('NFD')
+      .replace(/\p{Control}/gu, '') // Remove all control characters
+      .replace(/[\u200B-\u200D\uFEFF]/g, '') // Remove zero-width spaces
+      .replace(/[‘’]/g, "'") // Replace smart quotes with ASCII apostrophe
+      .replace(/[^a-zA-Z0-9!' ]/g, '') // Allow only letters, numbers, apostrophe, and space
+      .trim();
+  };
+
   const rawInput = document.getElementById("password-input").value;
-  const sanitizedInput = rawInput
-    .normalize('NFD') // Normalize Unicode
-    .replace(/[\u0300-\u036f]/g, '') // Remove diacritics
-    .replace(/[^\x20-\x7E]/g, '') // Remove non-printable ASCII
-    .trim();
+  const cleanInput = sanitize(rawInput);
+  const correctPassword = "cecin'estpasunmotdepasse"; // Verify this uses straight apostrophe
 
-  const correctPassword = "cecin'estpasunmotdepasse";
+  console.log("Raw:", JSON.stringify(rawInput));
+  console.log("Clean:", JSON.stringify(cleanInput));
 
-  // Debug logging (remove in production)
-  console.log('Raw:', JSON.stringify(rawInput));
-  console.log('Sanitized:', JSON.stringify(sanitizedInput));
-
-  if (sanitizedInput === correctPassword) {
-    // SUCCESS CASE
+  if (cleanInput === correctPassword) {
+    // Successful login logic
     localStorage.setItem("authenticated", "true");
-    
-    // Reset all error states
-    document.body.classList.remove("error-active");
-    document.body.style.backgroundColor = "#D8D0B8";
-    
-    // Hide overlays
     document.getElementById("password-overlay").style.display = "none";
-    const errorOverlay = document.getElementById("error-overlay");
-    if (errorOverlay) {
-      errorOverlay.style.display = "none";
-    }
-
-    // Show content
     document.querySelector("nav").style.display = "block";
     showSection("maison");
-
-    // Restart marquee
-    const marquee = document.querySelector('.marquee-content');
-    if (marquee) {
-      marquee.style.animation = 'none';
-      void marquee.offsetWidth; // Trigger reflow
-      marquee.style.animation = 'scroll-left 20s linear infinite, flashingColors 4s infinite alternate';
-    }
-
   } else {
-    // ERROR CASE
-    // Hide everything except error
-    document.querySelectorAll("section").forEach(s => s.style.display = "none");
-    document.getElementById("password-overlay").style.display = "none";
-    document.querySelector("nav").style.display = "none";
-
-    // Show error
+    // Error handling
     document.body.classList.add("error-active");
-    document.body.style.backgroundColor = "#DD1101";
-    const errorOverlay = document.getElementById("error-overlay");
-    if (errorOverlay) {
-      errorOverlay.style.display = "flex";
-      errorOverlay.innerHTML = '<p id="error-message">Non-lieu</p>';
-    }
-
-    // Reset after timeout
+    document.getElementById("error-overlay").style.display = "flex";
+    
     setTimeout(() => {
       document.body.classList.remove("error-active");
-      document.body.style.backgroundColor = "#D8D0B8";
-      if (errorOverlay) errorOverlay.style.display = "none";
+      document.getElementById("error-overlay").style.display = "none";
       document.getElementById("password-input").value = "";
-      document.getElementById("password-overlay").style.display = "flex";
     }, 1500);
   }
 }
