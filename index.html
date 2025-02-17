@@ -718,58 +718,70 @@ function showSection(sectionId) {
 
 // Updated checkPassword function
 function checkPassword() {
-  // Add this sanitization step
-  const userInput = document.getElementById("password-input").value
-    .replace(/[^\x00-\x7F]/g, "") // Remove non-ASCII characters
-    .trim(); // Remove whitespace
+  // Get and sanitize input FIRST
+  const rawInput = document.getElementById("password-input").value;
+  const sanitizedInput = rawInput
+    .normalize('NFD') // Normalize Unicode
+    .replace(/[\u0300-\u036f]/g, '') // Remove diacritics
+    .replace(/[^\x20-\x7E]/g, '') // Remove non-printable ASCII
+    .trim();
 
   const correctPassword = "cecin'estpasunmotdepasse";
-  const userInput = document.getElementById("password-input").value;
 
-  if (userInput === correctPassword) {
+  // Debug logging (remove in production)
+  console.log('Raw:', JSON.stringify(rawInput));
+  console.log('Sanitized:', JSON.stringify(sanitizedInput));
+
+  if (sanitizedInput === correctPassword) {
+    // SUCCESS CASE
     localStorage.setItem("authenticated", "true");
     
-    // Immediately reset error states
+    // Reset all error states
     document.body.classList.remove("error-active");
     document.body.style.backgroundColor = "#D8D0B8";
+    
+    // Hide overlays
+    document.getElementById("password-overlay").style.display = "none";
     const errorOverlay = document.getElementById("error-overlay");
     if (errorOverlay) {
-        errorOverlay.style.display = "none";
-        errorOverlay.innerHTML = '<p id="error-message">Non-lieu</p>';
+      errorOverlay.style.display = "none";
     }
 
-    // Hide password overlay and show content
-    document.getElementById("password-overlay").style.display = "none";
+    // Show content
     document.querySelector("nav").style.display = "block";
     showSection("maison");
 
-    // Force marquee animation restart
-    setTimeout(() => {
-      const marquee = document.querySelector('.marquee-content');
-      if (marquee) {
-        marquee.style.animation = 'none';
-        void marquee.offsetWidth;
-        marquee.style.animation = 'scroll-left 20s linear infinite, flashingColors 4s infinite alternate';
-      }
-    }, 100);
+    // Restart marquee
+    const marquee = document.querySelector('.marquee-content');
+    if (marquee) {
+      marquee.style.animation = 'none';
+      void marquee.offsetWidth; // Trigger reflow
+      marquee.style.animation = 'scroll-left 20s linear infinite, flashingColors 4s infinite alternate';
+    }
 
   } else {
-    // Error handling
+    // ERROR CASE
+    // Hide everything except error
     document.querySelectorAll("section").forEach(s => s.style.display = "none");
     document.getElementById("password-overlay").style.display = "none";
     document.querySelector("nav").style.display = "none";
 
-    document.getElementById("error-overlay").style.display = "flex";
+    // Show error
     document.body.classList.add("error-active");
+    document.body.style.backgroundColor = "#DD1101";
+    const errorOverlay = document.getElementById("error-overlay");
+    if (errorOverlay) {
+      errorOverlay.style.display = "flex";
+      errorOverlay.innerHTML = '<p id="error-message">Non-lieu</p>';
+    }
 
+    // Reset after timeout
     setTimeout(() => {
-      const errorOverlay = document.getElementById("error-overlay");
+      document.body.classList.remove("error-active");
+      document.body.style.backgroundColor = "#D8D0B8";
       if (errorOverlay) errorOverlay.style.display = "none";
       document.getElementById("password-input").value = "";
       document.getElementById("password-overlay").style.display = "flex";
-      document.querySelector("nav").style.display = "block";
-      document.body.classList.remove("error-active");
-      document.body.style.backgroundColor = "#D8D0B8";
     }, 1500);
   }
 }
