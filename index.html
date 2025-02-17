@@ -718,6 +718,11 @@ function showSection(sectionId) {
 
 // Updated checkPassword function
 function checkPassword() {
+  // Add this sanitization step
+  const userInput = document.getElementById("password-input").value
+    .replace(/[^\x00-\x7F]/g, "") // Remove non-ASCII characters
+    .trim(); // Remove whitespace
+
   const correctPassword = "cecin'estpasunmotdepasse";
   const userInput = document.getElementById("password-input").value;
 
